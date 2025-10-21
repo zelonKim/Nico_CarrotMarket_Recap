@@ -28,6 +28,7 @@ export default function SMSLogin() {
             placeholder="인증 코드"
             required
             key="token"
+            errors={state.error?.formErrors}
             //min={100000}
             //max={999999}
           />
