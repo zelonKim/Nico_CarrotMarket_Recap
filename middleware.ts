@@ -1,25 +1,22 @@
-import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import getSession from "./lib/session";
-import db from "./lib/db";
-import { redirect } from "next/navigation";
-
 
 interface Routes {
-    [key:string]: boolean;
+  [key: string]: boolean;
 }
-
 
 const publicOnlyUrls: Routes = {
-    "/": true,
-    "/login": true,
-    "/sms": true,
-    "/create-account": true,
-    "/github/start": true,
-    "/github/complete": true,
-}
+  "/": true,
+  "/login": true,
+  "/sms": true,
+  "/create-account": true,
+  "/github/start": true,
+  "/github/complete": true,
+};
 
 export async function middleware(request: NextRequest) {
+  /*
+
     const session = await getSession();
 
     const exists = publicOnlyUrls[request.nextUrl.pathname]
@@ -31,13 +28,14 @@ export async function middleware(request: NextRequest) {
     }
     else { // 유저가 로그인 상태인 경우
         if(exists){ // publicOnlyUrls로 이동하는 경우
-            return NextResponse.redirect(new URL("/products", request.url))
+            return NextResponse.redirect(new URL("/home", request.url))
         } 
     }
+
+    */
 }
 
-
-export const config = { // 미들웨어가 실행될 경로를 설정함.
-    matcher:  ["/((?!_next/static|_next/image|favicon.ico).*)"]
-}
-
+export const config = {
+  // 미들웨어가 실행될 경로를 설정함.
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+};
