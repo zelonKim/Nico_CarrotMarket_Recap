@@ -1,8 +1,5 @@
 "use server";
 
-import { PhotoIcon } from "@heroicons/react/24/solid";
-
-import fs from "fs/promises";
 import db from "@/lib/db";
 import getSession from "@/lib/session";
 import { redirect } from "next/navigation";

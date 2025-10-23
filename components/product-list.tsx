@@ -13,10 +13,12 @@ export default function ProductList({ initialProducts }: ProductListProps) {
   const [products, setProducts] = useState(initialProducts);
 
   const [isLoading, setIsLoading] = useState(false);
+  console.log(isLoading);
 
   const [page, setPage] = useState(0);
 
   const [isLastPage, setIsLastPage] = useState(false);
+  console.log(isLastPage);
 
   const trigger = useRef<HTMLSpanElement>(null);
 
@@ -64,14 +66,14 @@ export default function ProductList({ initialProducts }: ProductListProps) {
       {products.map((product) => (
         <ListProduct key={product.id} {...product} />
       ))}
-      {!isLastPage ? (
+      {/* {!isLastPage ? (
         <span
           ref={trigger}
           className="text-sm font-semibold bg-orange-500 w-fit mx-auto px-3 py-2 rounded-md hover:opacity-90 active:scale-95"
         >
           {isLoading ? "로딩중" : "더보기"}
         </span>
-      ) : null}
+      ) : null} */}
     </div>
   );
 }

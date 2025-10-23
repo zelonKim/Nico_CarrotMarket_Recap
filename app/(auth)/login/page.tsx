@@ -1,9 +1,8 @@
 "use client";
 
-import FormButton from "@/components/button";
 import FormInput from "@/components/input";
 import SocialLogin from "@/components/social-login";
-import { redirect } from "next/navigation";
+
 import { useFormState } from "react-dom";
 import { login } from "./actions";
 import { PASSWORD_MIN_LENGTH } from "@/lib/constants";
@@ -12,7 +11,7 @@ import Button from "@/components/button";
 export default function LogIn() {
   const [state, actionTrigger] = useFormState(login, {
     errors: ["처음 호출된 서버액션 에러 입니다."],
-  } as any); // 인수로 원하는 서버액션과 초기 상태값을 전달함.
+  } as unknown); // 인수로 원하는 서버액션과 초기 상태값을 전달함.
   // 첫번째 원소에는 해당 서버액션의 리턴값이 담김.
   // 두번째 원소에는 해당 서버액션을 호출하는 트리거가 담김.
 
@@ -31,6 +30,7 @@ export default function LogIn() {
     console.log(await response.json()); // {username: 'zelon', password: '1234'}
   };
 */
+  console.log(state);
   return (
     <div className="flex flex-col gap-10 py-8 px-6">
       <div className="flex flex-col gap-2 *:font-medium">
@@ -44,7 +44,7 @@ export default function LogIn() {
           type="email"
           placeholder="이메일"
           required
-          errors={state?.fieldErrors?.email}
+          //errors={state?.fieldErrors?.email}
         />
         <FormInput
           name="password"
@@ -52,7 +52,7 @@ export default function LogIn() {
           placeholder="비밀번호"
           required
           minLength={PASSWORD_MIN_LENGTH}
-          errors={state?.fieldErrors?.password}
+          //errors={state?.fieldErrors?.password}
         />
         <Button text="로그인" />
       </form>

@@ -5,7 +5,6 @@ import Input from "@/components/input";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import { getUploadUrl, uploadProduct } from "./actions";
-import { useFormState } from "react-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { productSchema, ProductType } from "./schema";
@@ -80,8 +79,6 @@ export default function AddProduct() {
   const onValid = async () => {
     await onSubmit();
   };
-
-
 
   return (
     <div>

@@ -1,39 +1,37 @@
 "use server"; // 서버 액션
-import {
-  PASSWORD_MIN_LENGTH,
-  PASSWORD_REGEX,
-  PASSWORD_REGEX_ERROR,
-} from "@/lib/constants";
+
 import db from "@/lib/db";
 import { z } from "zod";
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
 import getSession from "@/lib/session";
 import { redirect } from "next/navigation";
 
-
-const checkEmailExists = async(email: string) => {
+const checkEmailExists = async (email: string) => {
   const user = await db.user.findUnique({
     where: {
-      email
+      email,
     },
     select: {
-      id: true
-    }
-  })
-  return Boolean(user)
-}
-
+      id: true,
+    },
+  });
+  return Boolean(user);
+};
 
 const formSchema = z.object({
-  email: z.string().email().toLowerCase().refine(checkEmailExists, "존재하지 않는 이메일 입니다."),
-  password: z.string()
-    //.min(PASSWORD_MIN_LENGTH, "비밀번호는 최소 4자리 이상이어야 합니다.")
-    //.regex(PASSWORD_REGEX, PASSWORD_REGEX_ERROR),
+  email: z
+    .string()
+    .email()
+    .toLowerCase()
+    .refine(checkEmailExists, "존재하지 않는 이메일 입니다."),
+  password: z.string(),
+  //.min(PASSWORD_MIN_LENGTH, "비밀번호는 최소 4자리 이상이어야 합니다.")
+  //.regex(PASSWORD_REGEX, PASSWORD_REGEX_ERROR),
 });
 
 /////////////////////
 
-export const login = async (prevState: any, formData: FormData) => {
+export const login = async (prevState: unknown, formData: FormData) => {
   // 매개변수로 이전 상태값, 연결된 폼에 입력된 데이터가 전달됨.
   const data = {
     email: formData.get("email"),
@@ -49,33 +47,35 @@ export const login = async (prevState: any, formData: FormData) => {
   if (!result.success) {
     return result.error.flatten();
   } else {
-
     const user = await db.user.findUnique({
       where: {
-        email: result.data.email
+        email: result.data.email,
       },
       select: {
         id: true,
-        password: true
-      }
-    })
+        password: true,
+      },
+    });
 
-    const ok = await bcrypt.compare(result.data.password, user!.password ?? "aaaa")
+    const ok = await bcrypt.compare(
+      result.data.password,
+      user!.password ?? "aaaa"
+    );
 
-    if(ok) { 
+    if (ok) {
       // 로그인 과정
-      const session = await getSession()
-      session.id = user!.id // 세션에 유저 아이디를 기록함.
-      await session.save()
+      const session = await getSession();
+      session.id = user!.id; // 세션에 유저 아이디를 기록함.
+      await session.save();
 
-      redirect("/profile")
+      redirect("/profile");
     } else {
       return {
         fieldErrors: {
           email: [],
-          password: ["틀린 비밀번호 입니다."]
-        }
-      }
+          password: ["틀린 비밀번호 입니다."],
+        },
+      };
     }
   }
 };
