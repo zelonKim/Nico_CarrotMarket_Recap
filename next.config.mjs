@@ -8,6 +8,9 @@ const nextConfig = {
       {
         hostname: "imagedelivery.net",
       },
+      {
+        hostname: "img.freepik.com",
+      },
     ],
   },
 };

@@ -4,8 +4,9 @@ import { formatToWon } from "@/lib/utils";
 import { UserIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { unstable_cache as nextCache, revalidateTag } from "next/cache";
+import getSession from "@/lib/session";
 
 async function getIsOwner(userId: number) {
   // const session = await getSession();
@@ -90,6 +91,30 @@ export default async function ProductDetail({
     revalidateTag("product-title"); // 해당 태그를 가진 캐시 함수를 다시 실행함.
   };
 
+  const createChatRoom = async () => {
+    "use server";
+    const session = await getSession();
+
+    const room = await db.chatRoom.create({
+      data: {
+        users: {
+          connect: [
+            {
+              id: product.userId,
+            },
+            {
+              id: session.id,
+            },
+          ],
+        },
+      },
+      select: {
+        id: true,
+      },
+    });
+    redirect(`/chats/${room.id}`);
+  };
+
   return (
     <div>
       <div className="relative aspect-square">
@@ -124,22 +149,22 @@ export default async function ProductDetail({
         {isOwner ? (
           <form action={revalidate}>
             <button className="bg-red-500 px-5 py-2.5 rounded-md text-white font-semibold">
-              제목 최신화
+              update
             </button>
           </form>
         ) : null}
-        <Link
-          className="bg-orange-500 px-5 py-2.5 rounded-md text-white font-semibold"
-          href={``}
-        >
-          채팅하기
-        </Link>
+
+        <form action={createChatRoom}>
+          <button className="bg-orange-500 px-5 py-2.5 rounded-md text-white font-semibold">
+            채팅하기
+          </button>
+        </form>
       </div>
     </div>
   );
 }
 
-export const dynamicParams = false; 
+export const dynamicParams = false;
 //  동적으로 새로운 페이지를 생성하지 않고, 오직 빌드할때 미리 생성된 페이지들만 사용함.
 // (기본값은 true)
 
