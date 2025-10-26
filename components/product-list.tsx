@@ -4,6 +4,9 @@ import { InitialProducts } from "@/app/(tabs)/home/page";
 import ListProduct from "./list-product";
 import { useEffect, useRef, useState } from "react";
 import { getMoreProducts } from "@/app/(tabs)/home/action";
+import { ArrowPathIcon } from "@heroicons/react/24/solid";
+import PlusIconButton from "./plus-icon-button";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 interface ProductListProps {
   initialProducts: InitialProducts;
@@ -13,16 +16,15 @@ export default function ProductList({ initialProducts }: ProductListProps) {
   const [products, setProducts] = useState(initialProducts);
 
   const [isLoading, setIsLoading] = useState(false);
-  console.log(isLoading);
 
   const [page, setPage] = useState(0);
 
   const [isLastPage, setIsLastPage] = useState(false);
-  console.log(isLastPage);
 
   const trigger = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
+
     const observer = new IntersectionObserver(
       async (
         entries: IntersectionObserverEntry[],
@@ -62,18 +64,24 @@ export default function ProductList({ initialProducts }: ProductListProps) {
   }, [page]);
 
   return (
-    <div className="p-5 flex flex-col gap-5">
+    <div className="mt-4 flex flex-col">
       {products.map((product) => (
         <ListProduct key={product.id} {...product} />
       ))}
-      {/* {!isLastPage ? (
+
+      {!isLastPage ? (
         <span
           ref={trigger}
-          className="text-sm font-semibold bg-orange-500 w-fit mx-auto px-3 py-2 rounded-md hover:opacity-90 active:scale-95"
+          className="text-sm text-center text-neutral-400 font-semibold  w-fit mx-auto px-3 py-2 "
         >
-          {isLoading ? "로딩중" : "더보기"}
+          {isLoading ? (
+            <ArrowPathIcon className="size-6 animate-spin" />
+          ) : (
+            <ArrowPathIcon className="size-6 " />
+            
+          )}
         </span>
-      ) : null} */}
+      ) : null}
     </div>
   );
 }

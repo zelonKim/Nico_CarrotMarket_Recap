@@ -1,23 +1,19 @@
+import PlusIconButton from "@/components/plus-icon-button";
 import ProductList from "@/components/product-list";
 import db from "@/lib/db";
-import { ArrowPathIcon, PlusIcon } from "@heroicons/react/24/solid";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-//import { unstable_cache as nextCache } from "next/cache";
-import Link from "next/link";
+import { unstable_cache as nextCache } from "next/cache";
 
-/*
-const getCachedProducts = nextCahce(
+const getCachedProducts = nextCache(
   // 해당 함수 실행 결과를 주어진 키로 캐싱함.
   getInitialProducts,
-  ["home-products"]
-  // {revalidate: 60};  // 60초가 지난 후 새로운 요청이 있을 경우, 해당 함수를 다시 호출함.
+  ["home-products"],
+  { revalidate: 30 } // 30초가 지난 후 새로운 요청이 있을 경우, 해당 함수를 다시 호출함.
 );
-*/
 
 async function getInitialProducts() {
   //await new Promise(resolve => setTimeout(resolve, 5000));
-  console.log("hit!!");
   const products = await db.product.findMany({
     select: {
       title: true,
@@ -49,27 +45,13 @@ export const metadata = {
 //////////////////////
 
 export default async function Products() {
-  const initialProducts = await getInitialProducts();
-
-  const revalidate = async () => {
-    "use server";
-    revalidatePath("/home"); // 해당 경로에서 새로운 요청이 있을 경우, 모든 캐시 함수를 다시 호출함.
-  };
+  const initialProducts = await getCachedProducts();
 
   return (
     <div>
       <ProductList initialProducts={initialProducts} />
-      {/* <form action={revalidate}>
-        <button className="bg-orange-500 flex justify-center items-center rounded-full size-16 fixed bottom-24 left-8 text-white transition-colors hover:bg-orange-400">
-          <ArrowPathIcon className="size-10" />
-        </button>
-      </form> */}
-      <Link
-        href="/products/add"
-        className="bg-orange-500 flex justify-center items-center rounded-full size-16 fixed bottom-24 right-8 text-white transition-colors hover:bg-orange-400"
-      >
-        <PlusIcon className="size-10" />
-      </Link>
+
+      <PlusIconButton />
     </div>
   );
 }

@@ -26,8 +26,6 @@ export default async function Modal({ params }: { params: { id: string } }) {
   const id = Number(params.id);
   const product = await getProduct(id);
 
-  console.log(product);
-
   return (
     <div>
       <div className="absolute w-full h-full z-50 flex justify-center items-center bg-black bg-opacity-60 left-0 top-0">

@@ -9,11 +9,10 @@ import { unstable_cache as nextCache, revalidateTag } from "next/cache";
 import getSession from "@/lib/session";
 
 async function getIsOwner(userId: number) {
-  // const session = await getSession();
-  // if (session.id) {
-  //   return session.id === userId;
-  // }
-  console.log(userId);
+  const session = await getSession();
+  if (session.id) {
+    return session.id === userId;
+  }
   return false;
 }
 
@@ -81,7 +80,7 @@ export default async function ProductDetail({
   const product = await getCahcedProduct(id);
 
   if (!product) {
-    return notFound();
+    return <div>해당 제품이 없습니다.</div>;
   }
 
   const isOwner = await getIsOwner(product.userId);
@@ -163,7 +162,7 @@ export default async function ProductDetail({
     </div>
   );
 }
-
+/*
 export const dynamicParams = false;
 //  동적으로 새로운 페이지를 생성하지 않고, 오직 빌드할때 미리 생성된 페이지들만 사용함.
 // (기본값은 true)
@@ -178,3 +177,4 @@ export async function generateStaticParams() {
 
   return products.map((product) => ({ id: product.id + "" })); // [id]자리에 올 수 있는 값들을 리턴시켜줌.
 }
+*/

@@ -2,9 +2,10 @@ import LikeButton from "@/components/like-button";
 import db from "@/lib/db";
 import getSession from "@/lib/session";
 import { formatToTimeAgo } from "@/lib/utils";
-import { EyeIcon } from "@heroicons/react/24/solid";
+import { ArrowLeftIcon, EyeIcon } from "@heroicons/react/24/solid";
 import { unstable_cache as nextCache, revalidateTag } from "next/cache";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 async function getPost(id: number) {
@@ -102,30 +103,38 @@ export default async function PostDetail({
   const { isLiked, likeCount } = await getCachedLikeStatus(id);
 
   return (
-    <div className="p-5 text-white">
-      <div className="flex items-center gap-2 mb-2">
-        <Image
-          width={28}
-          height={28}
-          className="size-7 rounded-full"
-          src={post.user.avatar!}
-          alt={post.user.username}
-        />
-        <div>
-          <span className="text-sm font-semibold">{post.user.username}</span>
-          <div className="text-xs">
-            <span>{formatToTimeAgo(post.created_at.toString())}</span>
+    <div>
+      <Link href="/life">
+        <ArrowLeftIcon className="size-10 mt-8 text-white hover:text-orange-500 hover:scale-110 " />
+      </Link>
+      <div className="px-10 py-8 mt-10 text-white -z-50 bg-neutral-800 rounded-lg ">
+        <div className="flex items-center gap-2 mb-2">
+          <Image
+            width={32}
+            height={32}
+            className="size-10 rounded-full"
+            src={post.user.avatar!}
+            alt={post.user.username}
+          />
+          <div className="flex flex-row gap-[372px]">
+            <div className="flex flex-col items-start ms-2">
+              <span className="text-lg font-normal">{post.user.username}</span>
+              <span className="text-xs">
+                {formatToTimeAgo(post.created_at.toString())}
+              </span>
+            </div>
+
+            <div className=" flex flex-row gap-2 text-neutral-400 text-sm">
+              <EyeIcon className="size-5" />
+              <span>조회 {post.views}</span>
+            </div>
           </div>
         </div>
-      </div>
-      <h2 className="text-lg font-semibold">{post.title}</h2>
-      <p className="mb-5">{post.description}</p>
-      <div className="flex flex-col gap-5 items-start">
-        <div className="flex items-center gap-2 text-neutral-400 text-sm">
-          <EyeIcon className="size-5" />
-          <span>조회 {post.views}</span>
+        <h2 className="text-lg font-semibold mt-8 ms-2">{post.title}</h2>
+        <p className="mt-3 ms-2">{post.description}</p>
+        <div className=" flex flex-col gap-5 items-end mt-2">
+          <LikeButton isLiked={isLiked} likeCount={likeCount} postId={id} />
         </div>
-        <LikeButton isLiked={isLiked} likeCount={likeCount} postId={id}/>
       </div>
     </div>
   );

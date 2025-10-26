@@ -9,7 +9,7 @@ export async function getMoreProducts(page: number) {
       price: true,
       created_at: true,
       photo: true,
-      id: true, 
+      id: true,
     },
     skip: page * 1,
     take: 1,

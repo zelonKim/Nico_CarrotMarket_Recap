@@ -41,10 +41,10 @@ export default function LikeButton({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-2 text-neutral-400 text-sm border border-neutral-400 rounded-full p-2  transition-colors ${
+      className={`flex items-center gap-2 px-3 text-neutral-400 text-sm border border-neutral-400 rounded-full p-2  transition-colors ${
         state.isLiked
           ? "bg-orange-500 text-white border-orange-500 hover:bg-orange-400"
-          : "hover:bg-neutral-800"
+          : "hover:bg-neutral-700"
       }`}
     >
       {state.isLiked ? (
@@ -55,7 +55,7 @@ export default function LikeButton({
       {state.isLiked ? (
         <span> {state.likeCount}</span>
       ) : (
-        <span>공감하기 ({state.likeCount})</span>
+        <span>좋아요 ({state.likeCount})</span>
       )}
     </button>
   );
