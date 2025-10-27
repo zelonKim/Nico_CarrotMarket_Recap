@@ -35,7 +35,7 @@ export default function LogIn() {
     <div className="flex flex-col gap-10 py-8 px-6">
       <div className="flex flex-col gap-2 *:font-medium">
         <h1 className="text-2xl">안녕하세요!</h1>
-        <h2 className="text-xl">Log in with email and password.</h2>
+        <h2 className="text-xl">가깝고 따뜻한 당신의 근처를 만들어요.</h2>
       </div>
       <form action={actionTrigger} className="flex flex-col gap-3">
         {/* action속성을 통해 서버 액션과 폼을 연결함. */}

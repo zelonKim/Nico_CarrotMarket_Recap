@@ -116,8 +116,8 @@ model Message {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  room ChatRoom @relation(fields: [chatRoomId], references: [id])
-  user User     @relation(fields: [userId], references: [id])
+  room ChatRoom @relation(fields: [chatRoomId], references: [id], onDelete: Cascade)
+  user User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   chatRoomId String
   userId     Int

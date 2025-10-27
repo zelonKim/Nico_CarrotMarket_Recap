@@ -4,10 +4,12 @@ import Link from "next/link";
 export default function SocialLogin() {
   return (
     <>
-      <div className="w-full h-px bg-neutral-500" />
-      <div className="flex flex-col gap-3">
+      <div className="w-full h-px bg-neutral-50 " />
+
+      <div className="flex flex-col gap-4 -mt-4">
+        <span className="text-center font-semibold text-md">간편 로그인 </span>
         <Link
-          className="primary-btn flex h-10 items-center justify-center gap-2"
+          className="bg-neutral-700 hover:bg-neutral-800  text-white rounded-md w-full flex h-10 items-center justify-center gap-2"
           href="/github/start"
         >
           <svg
@@ -23,16 +25,16 @@ export default function SocialLogin() {
               clipRule="evenodd"
             ></path>
           </svg>
-          <span> Github로 가입하기</span>
+          <span> Github로 로그인</span>
         </Link>
         <Link
-          className="primary-btn flex h-10 items-center justify-center gap-2"
+          className="bg-yellow-400 hover:bg-yellow-500 w-full rounded-md text-neutral-900 flex h-10 items-center justify-center gap-2"
           href="/sms"
         >
           <span>
             <ChatBubbleOvalLeftEllipsisIcon className="h-6 w-6" />
           </span>
-          <span> SMS로 가입하기</span>
+          <span> 핸드폰번호로 로그인</span>
         </Link>
       </div>
     </>

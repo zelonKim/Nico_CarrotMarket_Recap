@@ -84,21 +84,21 @@ export default function AddProduct() {
   return (
     <div className="p-4">
       <Link href="/home">
-        <ArrowLeftIcon className="size-8 mt-4  text-white  hover:scale-110 " />
+        <ArrowLeftIcon className="size-8 mt-4  text-orange-400  hover:text-orange-500 hover:scale-110 " />
       </Link>
-      <h1 className="font-semibold flex flex-row justify-center text-2xl  mb-2">
+      <h1 className="font-semibold flex flex-row justify-center text-2xl text-orange-500  mb-2">
         중고물품 등록
       </h1>
-      <form action={onValid} className="p-5 flex flex-col gap-4">
+      <form action={onValid} className="  p-5 flex flex-col gap-4">
         <label
           htmlFor="photo"
-          className="hover:border-orange-500 bg-center bg-cover border-2 aspect-square max-h-96 flex items-center justify-center flex-col text-neutral-300 border-neutral-300 rounded-md border-dashed cursor-pointer"
+          className="hover:border-orange-500 bg-orange-200 hover:bg-orange-300 bg-center bg-cover border-2 aspect-square max-h-96 flex items-center justify-center flex-col text-neutral-300 border-neutral-300 rounded-md border-dashed cursor-pointer"
           style={{ backgroundImage: `url(${preview})` }}
         >
           {preview === "" ? (
             <>
-              <PhotoIcon className="w-20" />
-              <div className="text-neutral-400 text-sm">
+              <PhotoIcon className="w-20 text-orange-500" />
+              <div className="text-neutral-600 text-sm">
                 물품의 사진을 추가해주세요.
                 {errors.photo?.message}
               </div>

@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Roboto, Playfair } from "next/font/google";
-import localFont from "next/font/local";
-import "./globals.css";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -15,11 +13,6 @@ const playfair = Playfair({
   weight: "400",
   style: "normal",
   variable: "--playfair-text",
-});
-
-const metallica = localFont({
-  src: "./metallica.ttf",
-  variable: "--metallica-text",
 });
 
 export const metadata: Metadata = {
@@ -38,7 +31,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.variable} ${playfair.variable} ${metallica.variable} bg-orange-50 text-white  mx-auto`}
+        style={{
+          backgroundImage: `url(/carrotBg.png)`,
+        }}
+        className={`${roboto.variable} ${playfair.variable}  text-white mt-12 max-w-screen-md mx-auto bg-cover`}
       >
         {children}
       </body>

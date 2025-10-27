@@ -26,6 +26,10 @@ async function getInitialStreams() {
   return streams;
 }
 
+export const metadata = {
+  title: "라이브",
+};
+
 export default async function Live() {
   const streams = await getInitialStreams();
 

@@ -1,6 +1,10 @@
 import { getChatRooms } from "./action";
 import ChatRoomList from "@/components/chat-room-list";
 
+export const metadata = {
+  title: "채팅",
+};
+
 export default async function Chat() {
   const chatRooms = await getChatRooms();
 

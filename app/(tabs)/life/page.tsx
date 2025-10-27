@@ -41,17 +41,19 @@ export default async function Life() {
 
   return (
     <div className="p-5">
-      <h1 className=" text-neutral-100 text-2xl font-bold mt-2 -mb-2 ms-4">
-        생활 꿀팁 게시글
+      <h1 className=" text-orange-500 text-2xl font-bold mt-2 -mb-2 ms-4">
+        생활 꿀팁 게시글 🥕
       </h1>
-      <div className="py-5 flex flex-col ">
+      <div className="py-5 gap-3 flex-col grid lg:grid-cols-2">
         {posts.map((post) => (
           <Link
             key={post.id}
             href={`/posts/${post.id}`}
-            className="hover:rounded-sm p-4 border-b border-neutral-500 hover:bg-neutral-800 text-neutral-400 flex  flex-col gap-2  last:border-b-0"
+            className=" p-4 rounded-md  bg-orange-200  hover:bg-orange-300 *:text-neutral-700 flex  flex-col gap-2 border-orange-300 hover:border-orange-500 border-2 "
           >
-            <h2 className="text-white text-lg font-semibold">{post.title}</h2>
+            <h2 className="text-neutral-800 text-lg font-semibold">
+              {post.title}
+            </h2>
             <p>{post.description}</p>
             <div className="flex items-center justify-between text-sm">
               <div className="flex gap-4 items-center">

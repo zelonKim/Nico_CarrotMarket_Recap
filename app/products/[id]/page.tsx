@@ -11,6 +11,7 @@ import {
   revalidateTag,
 } from "next/cache";
 import getSession from "@/lib/session";
+import DeleteProductButton from "@/components/delete-product-button";
 
 async function getIsOwner(userId: number) {
   const session = await getSession();
@@ -112,6 +113,7 @@ export default async function ProductDetail({
 
   const createChatRoom = async () => {
     "use server";
+
     const session = await getSession();
 
     const room = await db.chatRoom.create({
@@ -176,11 +178,7 @@ export default async function ProductDetail({
         </span>
 
         {isOwner ? (
-          <form action={deleteProduct}>
-            <button className="bg-red-500 hover:bg-red-600 px-5 py-2.5 rounded-md text-white font-semibold">
-              삭제하기
-            </button>
-          </form>
+          <DeleteProductButton deleteProduct={deleteProduct} />
         ) : (
           <form action={createChatRoom}>
             <button className="bg-orange-500 hover:bg-orange-400 px-5 py-2.5 rounded-md text-white font-semibold">

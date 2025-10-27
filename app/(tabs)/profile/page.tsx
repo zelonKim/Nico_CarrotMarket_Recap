@@ -64,6 +64,11 @@ async function getUserStats() {
   };
 }
 
+
+export const metadata = {
+  title: "프로필",
+};
+
 export default async function Profile() {
   const user = await getUser();
   const stats = await getUserStats();

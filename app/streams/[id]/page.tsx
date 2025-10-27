@@ -4,6 +4,8 @@ import { ArrowLeftIcon, UserIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { endStream } from "./actions";
+import EndStreamButton from "@/components/end-stream-button";
 
 async function getStream(id: number) {
   const stream = await db.liveStream.findUnique({
@@ -42,11 +44,16 @@ export default async function StreamDetail({
 
   const session = await getSession();
 
+  const isOwner = stream.userId === session.id;
+
   return (
     <div className="p-10">
-      <Link href="/live">
-        <ArrowLeftIcon className="size-6 mb-6 hover:scale-110 text-white cursor-pointer" />
-      </Link>
+      <div className="flex items-center justify-between mb-6">
+        <Link href="/live">
+          <ArrowLeftIcon className="size-8 hover:scale-110 text-white cursor-pointer" />
+        </Link>
+        {isOwner && <EndStreamButton streamId={id} />}
+      </div>
       <div className="relative aspect-video">
         <iframe
           src={process.env.CLOUDFLARE_DOMAIN}
@@ -75,7 +82,7 @@ export default async function StreamDetail({
         <h1 className="text-2xl font-semibold">{stream.title}</h1>
       </div>
       {stream.userId === session.id! ? (
-        <div className="mt-16 bg-orange-300 text-black p-5 rounded-lg ">
+        <div className="mt-16 bg-orange-400 text-black p-5 rounded-lg ">
           <div className="flex gap-2">
             <span className="font-semibold">* 스트리밍 URL:</span>
             <span>rtmps://live.cloudflare.com:443/live/</span>

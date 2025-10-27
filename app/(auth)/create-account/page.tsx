@@ -11,13 +11,13 @@ export default function CreateAccount() {
   const [state, dispatch] = useFormState(createAccount, null);
 
   return (
-    <div className="flex flex-col gap-10 py-8 px-6">
+    <div className="flex flex-col max-w-screen-md gap-10 py-8 px-6 ">
       <div className="flex flex-col gap-2 *:font-medium">
         <h1 className="text-2xl">안녕하세요!</h1>
-        <h2 className="text-xl">Fill in the form below to join!</h2>
+        <h2 className="text-xl">당신의 프로필을 작성해주세요.</h2>
       </div>
 
-      <form action={dispatch} className="flex flex-col gap-3">
+      <form action={dispatch} className="flex flex-col gap-3 text-white">
         <Input
           name="username"
           type="text"
@@ -51,7 +51,7 @@ export default function CreateAccount() {
           errors={state?.fieldErrors.confirm_password}
         />
 
-        <Button text="계정 만들기" />
+        <Button text="가입하기" />
       </form>
       <SocialLogin />
     </div>

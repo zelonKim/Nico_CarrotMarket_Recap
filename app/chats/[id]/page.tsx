@@ -1,7 +1,10 @@
 import ChatMessagesList from "@/components/chat-messages-list";
 import db from "@/lib/db";
 import getSession from "@/lib/session";
-import { UserCircleIcon } from "@heroicons/react/24/solid";
+import {
+  ExclamationTriangleIcon,
+  UserCircleIcon,
+} from "@heroicons/react/24/outline";
 import { Prisma } from "@prisma/client";
 import { notFound } from "next/navigation";
 
@@ -74,7 +77,12 @@ export type InitialChatMessages = Prisma.PromiseReturnType<typeof getMessages>;
 export default async function ChatRoom({ params }: { params: { id: string } }) {
   const room = await getRoom(params.id);
   if (!room) {
-    return <div>채팅방이 존재하지 않습니다.</div>;
+    return (
+      <div className="mt-80 flex flex-col justify-center items-center gap-2 text-xl">
+        <ExclamationTriangleIcon className="size-8 " />
+        <span>채팅방이 존재하지 않습니다.</span>
+      </div>
+    );
   }
 
   const initialMessages = await getMessages(params.id);

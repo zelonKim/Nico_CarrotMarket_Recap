@@ -1,8 +1,9 @@
 import LikeButton from "@/components/like-button";
+import DeletePostButton from "@/components/delete-post-button";
 import db from "@/lib/db";
 import getSession from "@/lib/session";
 import { formatToTimeAgo } from "@/lib/utils";
-import { ArrowLeftIcon, EyeIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { ArrowLeftIcon, EyeIcon } from "@heroicons/react/24/solid";
 import {
   unstable_cache as nextCache,
   revalidatePath,
@@ -130,13 +131,7 @@ export default async function PostDetail({
       </Link>
 
       <div className="px-10 py-8 mt-10 text-white -z-50 bg-neutral-800 rounded-lg ">
-        {isOwner && (
-          <form action={deletePost}>
-            <button>
-              <TrashIcon className="size-4 ms-[380px] mb-3 -mt-3  sm:ms-[520px] md:ms-[640px] text-neutral-300 hover:text-red-400" />
-            </button>
-          </form>
-        )}
+        {isOwner && <DeletePostButton deletePost={deletePost} />}
         <div className="flex items-center gap-2 mb-2">
           <Image
             width={32}

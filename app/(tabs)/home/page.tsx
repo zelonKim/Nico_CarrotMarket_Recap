@@ -46,8 +46,8 @@ export default async function Products() {
 
   return (
     <div className="p-5 ">
-      <h1 className=" text-neutral-100 text-2xl font-bold mt-2 mb-4 ms-4">
-        실시간 중고물품
+      <h1 className=" text-orange-500 text-2xl font-bold mt-2 mb-4 ms-4">
+        실시간 중고물품 🥕
       </h1>
       <ProductList initialProducts={initialProducts} />
 
