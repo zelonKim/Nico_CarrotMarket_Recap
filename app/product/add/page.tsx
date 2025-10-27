@@ -2,12 +2,13 @@
 
 import Button from "@/components/button";
 import Input from "@/components/input";
-import { PhotoIcon } from "@heroicons/react/24/solid";
+import { ArrowLeftIcon, PhotoIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import { getUploadUrl, uploadProduct } from "./actions";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { productSchema, ProductType } from "./schema";
+import Link from "next/link";
 
 export default function AddProduct() {
   const [preview, setPreview] = useState("");
@@ -81,18 +82,24 @@ export default function AddProduct() {
   };
 
   return (
-    <div>
-      <form action={onValid} className="p-5 flex flex-col gap-5">
+    <div className="p-4">
+      <Link href="/home">
+        <ArrowLeftIcon className="size-8 mt-4  text-white  hover:scale-110 " />
+      </Link>
+      <h1 className="font-semibold flex flex-row justify-center text-2xl  mb-2">
+        중고물품 등록
+      </h1>
+      <form action={onValid} className="p-5 flex flex-col gap-4">
         <label
           htmlFor="photo"
-          className="bg-center bg-cover border-2 aspect-square flex items-center justify-center flex-col text-neutral-300 border-neutral-300 rounded-md border-dashed cursor-pointer"
+          className="hover:border-orange-500 bg-center bg-cover border-2 aspect-square max-h-96 flex items-center justify-center flex-col text-neutral-300 border-neutral-300 rounded-md border-dashed cursor-pointer"
           style={{ backgroundImage: `url(${preview})` }}
         >
           {preview === "" ? (
             <>
               <PhotoIcon className="w-20" />
               <div className="text-neutral-400 text-sm">
-                사진을 추가해주세요.
+                물품의 사진을 추가해주세요.
                 {errors.photo?.message}
               </div>
             </>
@@ -110,7 +117,7 @@ export default function AddProduct() {
 
         <Input
           required
-          placeholder="제목"
+          placeholder="물품 이름"
           type="text"
           {...register("title")}
           errors={[errors.title?.message ?? ""]}
@@ -127,12 +134,12 @@ export default function AddProduct() {
         <Input
           type="text"
           required
-          placeholder="자세한 설명"
+          placeholder="설명"
           {...register("description")}
           errors={[errors.description?.message ?? ""]}
         />
 
-        <Button text="작성 완료" />
+        <Button text="등록하기" />
       </form>
     </div>
   );

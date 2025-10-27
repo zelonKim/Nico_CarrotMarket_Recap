@@ -2,11 +2,15 @@ import LikeButton from "@/components/like-button";
 import db from "@/lib/db";
 import getSession from "@/lib/session";
 import { formatToTimeAgo } from "@/lib/utils";
-import { ArrowLeftIcon, EyeIcon } from "@heroicons/react/24/solid";
-import { unstable_cache as nextCache, revalidateTag } from "next/cache";
+import { ArrowLeftIcon, EyeIcon, TrashIcon } from "@heroicons/react/24/solid";
+import {
+  unstable_cache as nextCache,
+  revalidatePath,
+  revalidateTag,
+} from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 async function getPost(id: number) {
   try {
@@ -88,10 +92,25 @@ export default async function PostDetail({
 }: {
   params: { id: string };
 }) {
+  const session = await getSession();
+
   const id = Number(params.id);
 
   if (isNaN(id)) {
     return notFound();
+  }
+
+  async function deletePost() {
+    "use server";
+    const success = await db.post.delete({
+      where: {
+        id,
+      },
+    });
+    if (success) {
+      revalidatePath("/life");
+      redirect("/life");
+    }
   }
 
   const post = await getCachedPost(id);
@@ -100,14 +119,24 @@ export default async function PostDetail({
     return <div>게시물이 존재하지 않습니다.</div>;
   }
 
+  const isOwner = post.userId === session.id;
+
   const { isLiked, likeCount } = await getCachedLikeStatus(id);
 
   return (
-    <div>
+    <div className="p-6">
       <Link href="/life">
-        <ArrowLeftIcon className="size-10 mt-8 text-white hover:text-orange-500 hover:scale-110 " />
+        <ArrowLeftIcon className="size-8 mt-8 text-white  hover:scale-110 " />
       </Link>
+
       <div className="px-10 py-8 mt-10 text-white -z-50 bg-neutral-800 rounded-lg ">
+        {isOwner && (
+          <form action={deletePost}>
+            <button>
+              <TrashIcon className="size-4 ms-[380px] mb-3 -mt-3  sm:ms-[520px] md:ms-[640px] text-neutral-300 hover:text-red-400" />
+            </button>
+          </form>
+        )}
         <div className="flex items-center gap-2 mb-2">
           <Image
             width={32}
@@ -116,7 +145,7 @@ export default async function PostDetail({
             src={post.user.avatar!}
             alt={post.user.username}
           />
-          <div className="flex flex-row gap-[372px]">
+          <div className="flex flex-row gap-48 sm:gap-[320px]  md:gap-[450px]">
             <div className="flex flex-col items-start ms-2">
               <span className="text-lg font-normal">{post.user.username}</span>
               <span className="text-xs">
@@ -132,7 +161,7 @@ export default async function PostDetail({
         </div>
         <h2 className="text-lg font-semibold mt-8 ms-2">{post.title}</h2>
         <p className="mt-3 ms-2">{post.description}</p>
-        <div className=" flex flex-col gap-5 items-end mt-2">
+        <div className=" flex flex-col gap-5 items-end mt-5">
           <LikeButton isLiked={isLiked} likeCount={likeCount} postId={id} />
         </div>
       </div>

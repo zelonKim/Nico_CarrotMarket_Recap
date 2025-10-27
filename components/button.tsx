@@ -12,9 +12,9 @@ export default function Button({ text }: ButtonProps) {
   return (
     <button
       disabled={pending}
-      className="primary-btn h-10 disabled:bg-neutral-400 disabled:text-neutral-300 disabled:cursor-not-allowed"
+      className="font-semibold primary-btn h-10 disabled:bg-neutral-400 disabled:text-neutral-300 disabled:cursor-not-allowed"
     >
-      {pending ? "로딩중..." : text}
+      {pending ? "처리중..." : text}
     </button>
   );
 }

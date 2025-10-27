@@ -17,6 +17,8 @@ async function getRoom(id: string) {
       users: {
         select: {
           id: true,
+          username: true,
+          avatar: true,
         },
       },
     },
@@ -92,6 +94,7 @@ export default async function ChatRoom({ params }: { params: { id: string } }) {
       username={user.username}
       avatar={user.avatar || defaultUserImg}
       initialMessages={initialMessages}
+      participants={room.users}
     />
   );
 }

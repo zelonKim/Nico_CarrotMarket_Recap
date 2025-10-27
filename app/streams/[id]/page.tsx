@@ -1,7 +1,8 @@
 import db from "@/lib/db";
 import getSession from "@/lib/session";
-import { UserIcon } from "@heroicons/react/24/solid";
+import { ArrowLeftIcon, UserIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 async function getStream(id: number) {
@@ -43,6 +44,9 @@ export default async function StreamDetail({
 
   return (
     <div className="p-10">
+      <Link href="/live">
+        <ArrowLeftIcon className="size-6 mb-6 hover:scale-110 text-white cursor-pointer" />
+      </Link>
       <div className="relative aspect-video">
         <iframe
           src={process.env.CLOUDFLARE_DOMAIN}
@@ -71,14 +75,16 @@ export default async function StreamDetail({
         <h1 className="text-2xl font-semibold">{stream.title}</h1>
       </div>
       {stream.userId === session.id! ? (
-        <div className="bg-yellow-200 text-black p-5 rounded-md">
+        <div className="mt-16 bg-orange-300 text-black p-5 rounded-lg ">
           <div className="flex gap-2">
-            <span className="font-semibold">스트리밍 URL: </span>
+            <span className="font-semibold">* 스트리밍 URL:</span>
             <span>rtmps://live.cloudflare.com:443/live/</span>
           </div>
-          <div className="flex flex-wrap">
-            <span className="font-semibold text-nowrap">시크릿 키: </span>
-            <span>{stream.stream_key}</span>
+          <div className="flex flex-nowrap ">
+            <span className="font-semibold text-nowrap ">
+              * 시크릿 키: &nbsp;
+            </span>
+            <span className="text-wrap">{stream.stream_key}</span>
           </div>
         </div>
       ) : null}

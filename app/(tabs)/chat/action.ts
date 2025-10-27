@@ -2,6 +2,8 @@
 
 import db from "@/lib/db";
 import getSession from "@/lib/session";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function saveMessage(payload: string, chatRoomId: string) {
   const session = await getSession();
@@ -61,4 +63,16 @@ export async function getChatRooms() {
   });
 
   return chatRooms;
+}
+
+export async function deleteChatRoom(id: string) {
+  const success = await db.post.delete({
+    where: {
+      id,
+    },
+  });
+  if (success) {
+    revalidatePath("/life");
+    redirect("/life");
+  }
 }

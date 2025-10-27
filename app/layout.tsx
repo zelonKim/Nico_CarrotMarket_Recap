@@ -24,10 +24,10 @@ const metallica = localFont({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | 당근 마켓",
-    default: "당근 마켓",
+    template: "%s | 캐럿 마켓",
+    default: "캐럿 마켓",
   },
-  description: "sell and buy all the things",
+  description: "실시간 중고거래 플랫폼 캐럿마켓",
 };
 
 export default function RootLayout({
@@ -38,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.variable} ${playfair.variable} ${metallica.variable} bg-neutral-900 text-white max-w-screen-sm mx-auto`}
+        className={`${roboto.variable} ${playfair.variable} ${metallica.variable} bg-neutral-900 text-white max-w-screen-md mx-auto`}
       >
         {children}
       </body>

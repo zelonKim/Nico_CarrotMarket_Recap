@@ -40,8 +40,11 @@ export default async function Life() {
   const posts = await getPosts();
 
   return (
-    <div>
-      <div className="p-5 flex flex-col ">
+    <div className="p-5">
+      <h1 className=" text-neutral-100 text-2xl font-bold mt-2 -mb-2 ms-4">
+        생활 꿀팁 게시글
+      </h1>
+      <div className="py-5 flex flex-col ">
         {posts.map((post) => (
           <Link
             key={post.id}

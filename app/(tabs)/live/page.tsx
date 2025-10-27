@@ -31,7 +31,10 @@ export default async function Live() {
 
   return (
     <div>
-      <div className="p-5 flex flex-col gap-5">
+      <div className="p-5 flex flex-col gap-2">
+        <h1 className=" text-neutral-100 text-2xl font-bold mt-2 ms-4 mb-3">
+          실시간 라이브 방송
+        </h1>
         {streams.length === 0 ? (
           <div className="text-center text-neutral-500 py-20">
             <p>현재 진행 중인 라이브 방송이 없습니다.</p>

@@ -2,7 +2,6 @@ import PlusIconButton from "@/components/plus-icon-button";
 import ProductList from "@/components/product-list";
 import db from "@/lib/db";
 import { Prisma } from "@prisma/client";
-import { revalidatePath } from "next/cache";
 import { unstable_cache as nextCache } from "next/cache";
 
 const getCachedProducts = nextCache(
@@ -12,8 +11,7 @@ const getCachedProducts = nextCache(
   { revalidate: 30 } // 30초가 지난 후 새로운 요청이 있을 경우, 해당 함수를 다시 호출함.
 );
 
-async function getInitialProducts() {
-  //await new Promise(resolve => setTimeout(resolve, 5000));
+export async function getInitialProducts() {
   const products = await db.product.findMany({
     select: {
       title: true,
@@ -22,7 +20,6 @@ async function getInitialProducts() {
       photo: true,
       id: true,
     },
-    //take: 1,
     orderBy: {
       created_at: "desc",
     },
@@ -48,7 +45,10 @@ export default async function Products() {
   const initialProducts = await getCachedProducts();
 
   return (
-    <div>
+    <div className="p-5 ">
+      <h1 className=" text-neutral-100 text-2xl font-bold mt-2 mb-4 ms-4">
+        실시간 중고물품
+      </h1>
       <ProductList initialProducts={initialProducts} />
 
       <PlusIconButton />

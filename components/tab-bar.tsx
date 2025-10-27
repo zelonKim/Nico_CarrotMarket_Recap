@@ -23,8 +23,8 @@ export default function TabBar() {
   const pathname = usePathname();
 
   return (
-    <div className="fixed bottom-0 w-full mx-auto max-w-screen-md grid grid-cols-5 border-neutral-600 border-t px-5 py-3 *:text-white bg-neutral-800">
-      <Link href="/home" className="flex flex-col items-center gap-px">
+    <div className=" md:rounded-md hover:bg-opacity-90 fixed bottom-0 w-full mx-auto max-w-screen-md grid grid-cols-5 border-neutral-600 border-t px-5 py-3 *:text-white bg-neutral-800 ">
+      <Link href="/home" className=" flex flex-col items-center gap-px">
         {pathname === "/home" ? (
           <SolidHomeIcon className="w-7 h-7" />
         ) : (
@@ -57,7 +57,7 @@ export default function TabBar() {
         ) : (
           <OutlineVideoCameraIcon className="w-7 h-7" />
         )}
-        <span>쇼핑</span>
+        <span>라이브</span>
       </Link>
 
       <Link href="/profile" className="flex flex-col items-center gap-px">
@@ -66,7 +66,7 @@ export default function TabBar() {
         ) : (
           <OutlineUserIcon className="w-7 h-7" />
         )}
-        <span>나의 당근</span>
+        <span>나의 캐럿</span>
       </Link>
     </div>
   );

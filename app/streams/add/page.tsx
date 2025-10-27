@@ -9,14 +9,18 @@ export default function AddStream() {
   const [state, action] = useFormState(startStream, null);
 
   return (
-    <form className="p-5 flex flex-col gap-2" action={action}>
-      <Input
-        name="title"
-        required
-        placeholder="제목"
-        errors={state?.formErrors}
-      />
-      <Button text="스트리밍 시작" />
-    </form>
+    <div className="p-8">
+      <h1 className="text-center text-xl font-semibold">라이브 방송 개설</h1>
+      <form className="mt-8 flex flex-col gap-2" action={action}>
+        <Input
+          name="title"
+          required
+          placeholder="방송 제목"
+          errors={state?.formErrors}
+        />
+        <div className="mt-1"></div>
+        <Button text="개설하기" />
+      </form>
+    </div>
   );
 }

@@ -111,36 +111,45 @@ export default function EditProfile() {
   }
 
   return (
-    <div className="p-4">
+    <div className="p-8">
       <h1 className="text-2xl font-bold mb-6 text-center mt-12 ">
-        프로필 변경
+        나의 프로필
       </h1>
-      <form action={onSubmit} className="flex flex-col gap-4">
+      <form action={onSubmit} className="flex flex-col gap-3">
+        <label htmlFor="name">이름 </label>
         <Input
+          id="name"
           {...register("username")}
           type="text"
-          placeholder="사용자 이름"
+          placeholder="이름"
           defaultValue={defaultValues.username}
           errors={[errors.username?.message ?? ""]}
         />
 
+        <label htmlFor="phone">연락처</label>
         <Input
+          id="phone"
           {...register("phone")}
           type="text"
-          placeholder="전화번호"
+          placeholder="연락처"
           defaultValue={defaultValues.phone}
           errors={[errors.phone?.message ?? ""]}
         />
 
+        <label htmlFor="phone">프로필 사진 URL</label>
         <Input
           {...register("avatar")}
           type="text"
-          placeholder="아바타 URL"
+          placeholder="프로필 사진 URL"
           defaultValue={defaultValues.avatar}
           errors={[errors.avatar?.message ?? ""]}
         />
 
+        <label className="mt-5" htmlFor="pwd">
+          새로운 비밀번호
+        </label>
         <Input
+          id="pwd"
           {...register("password")}
           type="password"
           placeholder="새 비밀번호"
@@ -153,7 +162,7 @@ export default function EditProfile() {
           placeholder="새 비밀번호 확인"
           errors={[errors.password_confirm?.message ?? ""]}
         />
-
+        <div className="mt-1"></div>
         <Button text="변경하기" />
       </form>
     </div>

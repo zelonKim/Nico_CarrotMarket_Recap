@@ -5,8 +5,6 @@ import ListProduct from "./list-product";
 import { useEffect, useRef, useState } from "react";
 import { getMoreProducts } from "@/app/(tabs)/home/action";
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
-import PlusIconButton from "./plus-icon-button";
-import { revalidatePath, revalidateTag } from "next/cache";
 
 interface ProductListProps {
   initialProducts: InitialProducts;
@@ -24,7 +22,6 @@ export default function ProductList({ initialProducts }: ProductListProps) {
   const trigger = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-
     const observer = new IntersectionObserver(
       async (
         entries: IntersectionObserverEntry[],
@@ -36,11 +33,11 @@ export default function ProductList({ initialProducts }: ProductListProps) {
           observer.unobserve(trigger.current);
           setIsLoading(true);
 
-          const newProducts = await getMoreProducts(page + 1);
+          const newProducts = await getMoreProducts(page);
 
           if (newProducts.length !== 0) {
             setPage((prev) => prev + 1);
-            setProducts((prev) => [...prev, ...newProducts]);
+            //setProducts((prev) => [...prev, ...newProducts]);
           } else {
             setIsLastPage(true);
           }
@@ -64,7 +61,7 @@ export default function ProductList({ initialProducts }: ProductListProps) {
   }, [page]);
 
   return (
-    <div className="mt-4 flex flex-col">
+    <div className=" flex flex-col mb-16">
       {products.map((product) => (
         <ListProduct key={product.id} {...product} />
       ))}
@@ -74,12 +71,11 @@ export default function ProductList({ initialProducts }: ProductListProps) {
           ref={trigger}
           className="text-sm text-center text-neutral-400 font-semibold  w-fit mx-auto px-3 py-2 "
         >
-          {isLoading ? (
+          {/* {isLoading ? (
             <ArrowPathIcon className="size-6 animate-spin" />
           ) : (
             <ArrowPathIcon className="size-6 " />
-            
-          )}
+          )} */}
         </span>
       ) : null}
     </div>
