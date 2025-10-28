@@ -3,7 +3,6 @@ import db from "@/lib/db";
 import getSession from "@/lib/session";
 import {
   ExclamationTriangleIcon,
-  UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Prisma } from "@prisma/client";
 import { notFound } from "next/navigation";

@@ -20,9 +20,9 @@ export default function ListProduct({
   return (
     <Link
       href={`/products/${id}`}
-      className="flex gap-5 hover:bg-orange-300 bg-orange-200 rounded-lg p-3"
+      className="shadow-sm  flex gap-5 transition-colors hover:bg-orange-300 bg-orange-200 rounded-lg py-2 px-3"
     >
-      <div className="relative size-28 rounded-full  overflow-hidden">
+      <div className="relative size-24 rounded-full mt-1  overflow-hidden">
         <Image
           fill
           src={`${photo}/avatar`}
@@ -31,11 +31,15 @@ export default function ListProduct({
           className="bg-cover bg-center"
         />
       </div>
-      <div className=" flex flex-col gap-1 *:text-neutral-800">
-        <span className="text-lg font-semibold mt-4">{title}</span>
+      <div className=" flex flex-col gap-1 ">
+        <span className="text-lg font-semibold mt-2 text-neutral-800">
+          {title}
+        </span>
 
-        <span className="text-md font-semibold">{formatToWon(price)}원</span>
-        <span className="text-xs text-neutral-500 mt-2">
+        <span className="text-md font-normal  text-neutral-700">
+          {formatToWon(price)} 원
+        </span>
+        <span className="text-xs text-neutral-600 mt-2">
           {formatToTimeAgo(created_at.toString()) === "0일 전"
             ? "오늘"
             : formatToTimeAgo(created_at.toString())}

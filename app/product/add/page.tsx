@@ -82,9 +82,9 @@ export default function AddProduct() {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 max-w-screen-md mx-auto pb-16">
       <Link href="/home">
-        <ArrowLeftIcon className="size-8 mt-4  text-orange-400  hover:text-orange-500 hover:scale-110 " />
+        <ArrowLeftIcon className="size-8 mt-4  text-neutral-500  hover:text-neutral-600 hover:scale-110 " />
       </Link>
       <h1 className="font-semibold flex flex-row justify-center text-2xl text-orange-500  mb-2">
         중고물품 등록

@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     default: "캐럿 마켓",
   },
   description: "실시간 중고거래 플랫폼 캐럿마켓",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({

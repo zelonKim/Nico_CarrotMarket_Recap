@@ -45,7 +45,7 @@ export default function TabBar() {
         ) : (
           <OutlineNewspaperIcon className="w-7 h-7" />
         )}
-        <span>동네생활</span>
+        <span>생활꿀팁</span>
       </Link>
 
       <Link

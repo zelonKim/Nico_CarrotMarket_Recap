@@ -20,7 +20,7 @@ export default function DeletePostButton({
   return (
     <form onSubmit={handleDelete}>
       <button>
-        <TrashIcon className="size-4 ms-[380px] mb-3 -mt-3  sm:ms-[520px] md:ms-[640px] text-neutral-300 hover:text-red-400" />
+        <TrashIcon className="size-5  mb-3 -mt-5  ms-[360px]  sm:ms-[510px] md:ms-[625px] text-red-500 hover:text-red-600" />
       </button>
     </form>
   );

@@ -47,7 +47,7 @@ export default function ProductList({ initialProducts }: ProductListProps) {
       },
       {
         threshold: 1.0,
-        rootMargin: "0px 0px -100px 0px",
+        rootMargin: "0px 0px 0px 0px",
       }
     );
 
@@ -61,23 +61,26 @@ export default function ProductList({ initialProducts }: ProductListProps) {
   }, [page]);
 
   return (
-    <div className="flex-col relative gap-4 mb-16 grid md:grid-cols-2 xl:grid-cols-3">
+    <div className="flex-col relative gap-4 grid md:grid-cols-2 ">
       {products.map((product) => (
         <ListProduct key={product.id} {...product} />
       ))}
 
-      {!isLastPage ? (
+      {/* {!isLastPage ? (
         <span
           ref={trigger}
-          className="text-sm text-center text-neutral-400 font-semibold  w-fit mx-auto px-3 py-2 "
+          style={{
+            marginTop: `${page + 1 * 100}vh`,
+          }}
+          className="pt-96 text-sm text-center text-orange-400 text-bold font-semibold  w-fit mx-auto px-3 py-2 "
         >
-          {/* {isLoading ? (
+          {isLoading ? (
             <ArrowPathIcon className="size-6 animate-spin" />
           ) : (
             <ArrowPathIcon className="size-6 " />
-          )} */}
+          )}
         </span>
-      ) : null}
+      ) : null} */}
     </div>
   );
 }

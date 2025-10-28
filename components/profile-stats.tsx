@@ -29,14 +29,14 @@ export default function ProfileStats({
   ];
 
   return (
-    <div className="grid grid-cols-1 gap-5 mt-2 ">
+    <div className="grid grid-cols-1 lg:grid-cols-2 lg:mt-12 gap-5 mt-2 ">
       {stats.map((stat) => (
         <button
           key={stat.label}
           onClick={() => handleStatClick(stat.path)}
-          className="bg-orange-50 p-4 rounded-lg shadow-sm hover:bg-orange-200 hover:shadow-md transition-shadow border border-gray-200 hover:border-orange-400"
+          className="lg:py-12 bg-orange-200 p-4 rounded-lg  hover:bg-orange-300 hover:shadow-md transition-colors shadow-md "
         >
-          <div className="text-gray-600  text-md mb-1">{stat.label}</div>
+          <div className="text-neutral-800  text-md mb-1">{stat.label}</div>
           <div className="text-2xl font-bold text-orange-500">{stat.count}</div>
         </button>
       ))}

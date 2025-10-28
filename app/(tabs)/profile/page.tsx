@@ -64,7 +64,6 @@ async function getUserStats() {
   };
 }
 
-
 export const metadata = {
   title: "프로필",
 };
@@ -83,7 +82,9 @@ export default async function Profile() {
   return (
     <div className="flex flex-col gap-6 p-7 mb-4">
       <div className="flex gap-4 justify-between items-center">
-        <h1 className="text-2xl ms-1 font-bold">{user?.username}님의 캐럿</h1>
+        <h1 className="text-2xl ms-1 font-bold text-orange-500">
+          {user?.username}님의 캐럿 🥕
+        </h1>
         <form action={logOut}>
           <button className=" bg-red-500 py-1 px-2 rounded-lg hover:bg-red-600 text-white">
             로그아웃
@@ -98,10 +99,10 @@ export default async function Profile() {
         liveStreamCount={stats.liveStreamCount}
       />
 
-      <div className="mt-4">
+      <div className="mt-6">
         <Link
           href="/profile/edit"
-          className="text-lg font-semibold flex flex-row  gap-3 justify-center w-full bg-orange-500 text-white py-3 px-4 rounded-lg text-center hover:bg-orange-400 transition-colors"
+          className="text-lg font-semibold flex flex-row  gap-3 justify-center w-full bg-green-500 text-white py-3 px-4 rounded-lg text-center hover:bg-green-600 transition-colors"
         >
           프로필 변경하러 가기{" "}
           <ArrowRightIcon className="size-5 mt-1 font-bold" />

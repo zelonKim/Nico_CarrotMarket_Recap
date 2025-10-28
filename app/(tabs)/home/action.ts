@@ -1,11 +1,11 @@
 "use server";
 
 import db from "@/lib/db";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
-export async function getMoreProducts(page:number) {
-  revalidateTag("home-products");
-  console.log(page);
+export async function getMoreProducts(page: number) {
+  revalidatePath("/home");
+  console.log("Get more product from DB");
 
   const products = await db.product.findMany({
     select: {

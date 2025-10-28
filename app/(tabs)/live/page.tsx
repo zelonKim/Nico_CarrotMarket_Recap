@@ -35,12 +35,12 @@ export default async function Live() {
 
   return (
     <div>
-      <div className="p-5 flex flex-col gap-2">
-        <h1 className=" text-neutral-100 text-2xl font-bold mt-2 ms-4 mb-3">
-          실시간 라이브 방송
-        </h1>
+      <h1 className=" text-orange-500 text-2xl font-bold mt-2 ms-4  pt-5 ps-5">
+        실시간 라이브 방송 🥕
+      </h1>
+      <div className="grid lg:grid-cols-2 p-5 gap-5">
         {streams.length === 0 ? (
-          <div className="text-center text-neutral-500 py-20">
+          <div className="text-center text-neutral-700 py-20">
             <p>현재 진행 중인 라이브 방송이 없습니다.</p>
           </div>
         ) : (
@@ -48,9 +48,9 @@ export default async function Live() {
             <Link
               key={stream.id}
               href={`/streams/${stream.id}`}
-              className="flex gap-5 hover:bg-neutral-800 rounded-md p-3"
+              className="transition-colors shadow-sm flex gap-5 hover:bg-orange-300 bg-orange-200 rounded-md p-3 "
             >
-              <div className="relative size-28 rounded-md overflow-hidden bg-neutral-600">
+              <div className="relative size-28 rounded-md overflow-hidden bg-neutral-50 ">
                 {stream.stream_id ? (
                   <div className="absolute inset-0 flex items-center justify-center">
                     <svg
@@ -59,7 +59,7 @@ export default async function Live() {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="size-12 text-red-500"
+                      className="size-12 text-orange-500"
                     >
                       <path
                         strokeLinecap="round"
@@ -92,7 +92,7 @@ export default async function Live() {
                   </div>
                 )}
               </div>
-              <div className="flex flex-col gap-1 *:text-white flex-1">
+              <div className="flex flex-col gap-1 flex-1 mt-3">
                 <div className="flex items-center gap-2">
                   <div className="size-6 overflow-hidden rounded-full">
                     {stream.user.avatar && stream.user.avatar !== "http://" ? (
@@ -101,18 +101,20 @@ export default async function Live() {
                         width={24}
                         height={24}
                         alt={stream.user.username}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover "
                       />
                     ) : (
-                      <UserIcon className="size-6 text-neutral-500" />
+                      <UserIcon className="size-6 text-orange-500" />
                     )}
                   </div>
-                  <span className="text-xs text-neutral-400">
+                  <span className="text-sm text-neutral-800">
                     {stream.user.username}
                   </span>
                 </div>
-                <span className="text-lg font-semibold">{stream.title}</span>
-                <span className="text-xs text-neutral-500">
+                <span className="text-lg mt-1 font-semibold text-neutral-800 ">
+                  {stream.title}
+                </span>
+                <span className="text-xs text-neutral-700 mt-2">
                   {formatToTimeAgo(stream.created_at.toString()) === "0일 전"
                     ? "오늘"
                     : formatToTimeAgo(stream.created_at.toString())}

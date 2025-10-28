@@ -47,10 +47,10 @@ export default async function StreamDetail({
   const isOwner = stream.userId === session.id;
 
   return (
-    <div className="p-10">
+    <div className="p-10 *:text-neutral-800 max-w-screen-lg mx-auto">
       <div className="flex items-center justify-between mb-6">
         <Link href="/live">
-          <ArrowLeftIcon className="size-8 hover:scale-110 text-white cursor-pointer" />
+          <ArrowLeftIcon className="size-8 hover:scale-110 hover:text-neutral-700 text-neutral-600 cursor-pointer" />
         </Link>
         {isOwner && <EndStreamButton streamId={id} />}
       </div>
@@ -61,7 +61,7 @@ export default async function StreamDetail({
           className="w-full h-full rounded-md"
         ></iframe>
       </div>
-      <div className="p-5 flex items-center gap-3 border-b border-neutral-700">
+      <div className="p-5 flex items-center gap-3 border-b border-orange-400">
         <div className="size-10 overflow-hidden rounded-full">
           {stream.user.avatar !== null ? (
             <Image

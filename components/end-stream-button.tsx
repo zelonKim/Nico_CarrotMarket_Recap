@@ -28,8 +28,7 @@ export default function EndStreamButton({ streamId }: EndStreamButtonProps) {
       disabled={isPending}
       className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      <VideoCameraSlashIcon className="size-4" />
-      {isPending ? "종료 중..." : "방송 종료하기"}
+      <VideoCameraSlashIcon className="size-5" />
     </button>
   );
 }

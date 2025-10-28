@@ -11,9 +11,9 @@ export default function AddPost() {
   const [state, action] = useFormState(createPost, null);
 
   return (
-    <div className="p-4">
+    <div className="p-4 max-w-screen-md mx-auto">
       <Link href="/life">
-        <ArrowLeftIcon className="size-8 mt-4  text-orange-400 hover:text-orange-500 hover:scale-110 " />
+        <ArrowLeftIcon className="size-8 mt-4  text-neutral-500 hover:text-neutral-600 hover:scale-110 " />
       </Link>
       <h1 className="text-orange-500 font-semibold flex flex-row justify-center text-2xl mt-3 mb-3">
         생활 꿀팁 포스팅

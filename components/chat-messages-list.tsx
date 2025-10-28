@@ -126,7 +126,7 @@ export default function ChatMessagesList({
 
   return (
     <div>
-      <div className="md:rounded-md bg-neutral-800 flex flex-row justify-between items-center py-3 px-4  border-b border-neutral-700">
+      <div className=" bg-orange-400 flex flex-row justify-between items-center py-3 px-4 opacity-95">
         <div className="flex gap-2 items-center">
           <Link href="/chat">
             <ArrowLeftIcon className="size-8 mr-4 ms-1 text-white  hover:scale-110 " />
@@ -149,11 +149,11 @@ export default function ChatMessagesList({
                   alt={participant.username}
                   width={40}
                   height={40}
-                  className="size-11 rounded-full border-2 border-neutral-700 hover:border-orange-500 transition-colors"
+                  className="size-11 rounded-full border-2 border-orange-500 hover:border-orange-600 transition-colors"
                 />
               </button>
               {showUsername === participant.username && (
-                <div className="absolute left-0 top-12 bg-neutral-700 text-white px-3 py-1 rounded-md text-sm whitespace-nowrap z-10">
+                <div className="absolute left-0 top-12 bg-orange-600 text-white px-3 py-1 rounded-md text-sm whitespace-nowrap z-10">
                   {participant.username}
                 </div>
               )}
@@ -165,11 +165,10 @@ export default function ChatMessagesList({
           className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white transition-colors"
         >
           <ArrowRightEndOnRectangleIcon className="size-5" />
-          채팅방 나가기
         </button>
       </div>
 
-      <div className="p-6 flex flex-col gap-5 min-h-screen justify-end pb-24">
+      <div className="p-6 flex flex-col gap-5 min-h-screen justify-end  ">
         {messages.map((message) => (
           <div
             key={message.id}
@@ -193,12 +192,12 @@ export default function ChatMessagesList({
             >
               <span
                 className={`${
-                  message.userId === userId ? "bg-neutral-500" : "bg-orange-500"
+                  message.userId === userId ? "bg-orange-500" : "bg-green-500"
                 } p-2.5 rounded-md`}
               >
                 {message.payload}
               </span>
-              <span className="text-xs">
+              <span className="text-xs text-neutral-600">
                 {formatToTimeAgo(message.created_at.toString())}
               </span>
             </div>
@@ -209,7 +208,7 @@ export default function ChatMessagesList({
             required
             onChange={onChange}
             value={message}
-            className=" bg-transparent rounded-full w-full h-10 focus:outline-none px-5 ring-2 focus:ring-3 transition ring-neutral-200 focus:ring-orange-500 focus:bg-neutral-800 border-none placeholder:text-neutral-400"
+            className=" text-neutral-600 bg-transparent rounded-full w-full h-10 focus:outline-none px-5 ring-2 focus:ring-3 transition ring-neutral-400 focus:ring-orange-400 focus:bg-orange-200 border-none placeholder:text-neutral-400"
             type="text"
             name="message"
             placeholder="메시지를 입력해주세요."

@@ -13,6 +13,9 @@ import {
 import getSession from "@/lib/session";
 import DeleteProductButton from "@/components/delete-product-button";
 
+const defaultUserImg =
+  "https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3408.jpg";
+
 async function getIsOwner(userId: number) {
   const session = await getSession();
   if (session.id) {
@@ -139,17 +142,17 @@ export default async function ProductDetail({
   return (
     <div className="p-6">
       <Link href="/home">
-        <ArrowLeftIcon className="size-8 md:ms-8 lg:ms-4  mb-3  hover:scale-110 text-white" />
+        <ArrowLeftIcon className="size-8 md:ms-8 lg:ms-4  mb-3  hover:scale-110 text-neutral-500 hover:text-neutral-600" />
       </Link>
-      <div className="relative aspect-square max-h-[560px] lg:max-h-[600px] mx-auto  rounded-md">
+      <div className="relative aspect-square max-h-[560px] lg:max-h-[600px] mx-auto  rounded-md ">
         <Image
           fill
           src={`${product.photo}/public`}
           alt={product.title}
-          className="rounded-md"
+          className="rounded-xl "
         />
       </div>
-      <div className="p-5 mt-2 flex items-center gap-3 border-b border-neutral-700">
+      <div className="text-neutral-800 p-5 mt-2 flex items-center gap-3 border-b border-orange-400">
         <div className="size-10 overflow-hidden rounded-full">
           {product.user.avatar !== null ? (
             <Image
@@ -159,7 +162,7 @@ export default async function ProductDetail({
               alt={product.user.username}
             />
           ) : (
-            <UserIcon />
+            <UserIcon className="text-neutral-600" />
           )}
         </div>
         <div>
@@ -167,21 +170,21 @@ export default async function ProductDetail({
         </div>
       </div>
 
-      <div className="p-5 mb-28">
+      <div className="p-5 mb-28 text-neutral-700">
         <h1 className="text-2xl font-semibold">{product.title}</h1>
-        <p>{product.description}</p>
+        <p className="mt-3">{product.description}</p>
       </div>
 
-      <div className="fixed w-full bottom-0 left-0 p-6 pb-6  bg-neutral-800 flex justify-between items-center">
+      <div className="fixed w-full bottom-0 left-0 p-6 pb-6  bg-orange-500 bg-opacity-95 flex justify-between items-center">
         <span className="font-semibold text-xl">
-          {formatToWon(product.price)}원
+          중고 가격: {formatToWon(product.price)}원
         </span>
 
         {isOwner ? (
           <DeleteProductButton deleteProduct={deleteProduct} />
         ) : (
           <form action={createChatRoom}>
-            <button className="bg-orange-500 hover:bg-orange-400 px-5 py-2.5 rounded-md text-white font-semibold">
+            <button className="bg-green-500 hover:bg-green-600 px-5 py-2.5 rounded-md text-white font-semibold">
               채팅하기
             </button>
           </form>

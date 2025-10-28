@@ -6,9 +6,9 @@ export default function HomeLayout({
   modal: React.ReactNode;
 }) {
   return (
-    <>
+    <div className=" mx-auto bg-orange-50">
       {children}
       {modal}
-    </>
+    </div>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowPathIcon } from "@heroicons/react/24/solid";
 import { useFormStatus } from "react-dom";
 
 interface ButtonProps {
@@ -12,9 +13,13 @@ export default function Button({ text }: ButtonProps) {
   return (
     <button
       disabled={pending}
-      className="font-semibold bg-green-500 hover:bg-green-600  rounded-md h-10 disabled:bg-neutral-400 disabled:text-neutral-300 disabled:cursor-not-allowed"
+      className="!text-white flex justify-center items-center font-semibold bg-green-500 hover:bg-green-600  rounded-md h-10 disabled:bg-neutral-400 disabled:text-neutral-300 disabled:cursor-not-allowed"
     >
-      {pending ? "처리중..." : text}
+      {pending ? (
+        <ArrowPathIcon className="size-5 animate-spin text-center text-white" />
+      ) : (
+        text
+      )}
     </button>
   );
 }

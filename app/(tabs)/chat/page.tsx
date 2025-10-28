@@ -10,7 +10,9 @@ export default async function Chat() {
 
   return (
     <div className="p-7">
-      <h1 className="text-white text-2xl font-bold mb-6 ms-2">채팅방 목록</h1>
+      <h1 className="text-orange-500 text-2xl font-bold mb-6 ms-2">
+        채팅방 목록 🥕
+      </h1>
       <ChatRoomList chatRooms={chatRooms} />
     </div>
   );
