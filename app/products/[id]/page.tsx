@@ -5,11 +5,7 @@ import { ArrowLeftIcon, UserIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import {
-  unstable_cache as nextCache,
-  revalidatePath,
-  revalidateTag,
-} from "next/cache";
+import { unstable_cache as nextCache, revalidatePath } from "next/cache";
 import getSession from "@/lib/session";
 import DeleteProductButton from "@/components/delete-product-button";
 
