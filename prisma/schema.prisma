@@ -3,9 +3,9 @@ generator client {
 }
 
 datasource db {
-  // provider = "postgresql"
-  provider = "sqlite" // 사용할 DB의 종류
-  url      = env("DATABASE_URL") // 사용할 DB의 위치
+    //provider = "sqlite" // 사용할 DB의 종류
+  provider = "postgresql"
+  url  	    = env("DATABASE_URL")// 사용할 DB의 위치
 }
 
 // npx prisma migrate dev 명령어 -> 프리즈마 스키마를 실제 데이터베이스에 반영함.
