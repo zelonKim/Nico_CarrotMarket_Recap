@@ -3,12 +3,21 @@
 import db from "@/lib/db";
 import getSession from "@/lib/session";
 import { redirect } from "next/navigation";
+import { streamSchema } from "./schema";
 import { z } from "zod";
 
-const title = z.string();
+type StreamFormState =
+  | z.inferFlattenedErrors<typeof streamSchema>
+  | null
+  | undefined;
 
-export async function startStream(_: any, formData: FormData) {
-  const results = title.safeParse(formData.get("title"));
+export async function startStream(
+  prevState: StreamFormState,
+  formData: FormData
+) {
+  const results = streamSchema.safeParse({
+    title: formData.get("title"),
+  });
   if (!results.success) {
     return results.error.flatten();
   }
@@ -22,7 +31,7 @@ export async function startStream(_: any, formData: FormData) {
       },
       body: JSON.stringify({
         meta: {
-          name: results.data,
+          name: results.data.title,
         },
         recording: {
           mode: "automatic",
@@ -35,7 +44,7 @@ export async function startStream(_: any, formData: FormData) {
 
   const stream = await db.liveStream.create({
     data: {
-      title: results.data,
+      title: results.data.title,
       stream_id: data.result.uid,
       stream_key: data.result.rtmps.streamKey,
       userId: session.id!,

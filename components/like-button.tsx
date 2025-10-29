@@ -19,7 +19,7 @@ export default function LikeButton({
   const [state, reducerFn] = useOptimistic(
     // 서버에서 데이터를 받아오는 동안, 대신해서 해당 상태를 보여줌.
     { isLiked, likeCount }, // 상태 (state)
-    (previousState, payload) => ({
+    (previousState) => ({
       // 상태 업데이트 함수 (reducerFn)
       isLiked: !previousState.isLiked,
       likeCount: previousState.isLiked

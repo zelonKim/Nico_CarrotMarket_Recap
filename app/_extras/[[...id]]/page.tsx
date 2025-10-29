@@ -2,7 +2,6 @@ import HackedComponent from "@/components/hacked-component";
 import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import {
-  experimental_taintObjectReference,
   experimental_taintUniqueValue,
 } from "react";
 import heavyImage from "../../../public/heavy-image.jpeg";

@@ -12,7 +12,6 @@ import {
   DevicePhoneMobileIcon,
   LockClosedIcon,
   PencilSquareIcon,
-  PhoneIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";

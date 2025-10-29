@@ -4,14 +4,13 @@ import { InitialProducts } from "@/app/(tabs)/home/page";
 import ListProduct from "./list-product";
 import { useEffect, useRef, useState } from "react";
 import { getMoreProducts } from "@/app/(tabs)/home/action";
-import { ArrowPathIcon } from "@heroicons/react/24/solid";
 
 interface ProductListProps {
   initialProducts: InitialProducts;
 }
 
 export default function ProductList({ initialProducts }: ProductListProps) {
-  const [products, setProducts] = useState(initialProducts);
+  const [products] = useState(initialProducts);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,7 +32,7 @@ export default function ProductList({ initialProducts }: ProductListProps) {
           observer.unobserve(trigger.current);
           setIsLoading(true);
 
-          const newProducts = await getMoreProducts(page);
+          const newProducts = await getMoreProducts();
 
           if (newProducts.length !== 0) {
             setPage((prev) => prev + 1);
@@ -57,6 +56,8 @@ export default function ProductList({ initialProducts }: ProductListProps) {
 
     return () => {
       observer.disconnect();
+      console.log(isLoading);
+      console.log(isLastPage);
     };
   }, [page]);
 

@@ -4,7 +4,6 @@ import { ArrowLeftIcon, UserIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { endStream } from "./actions";
 import EndStreamButton from "@/components/end-stream-button";
 
 async function getStream(id: number) {

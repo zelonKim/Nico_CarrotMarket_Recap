@@ -1,10 +1,7 @@
 "use client";
 
 import { endStream } from "@/app/streams/[id]/actions";
-import {
-  MicrophoneIcon,
-  VideoCameraSlashIcon,
-} from "@heroicons/react/24/solid";
+import { VideoCameraSlashIcon } from "@heroicons/react/24/solid";
 import { useTransition } from "react";
 
 interface EndStreamButtonProps {

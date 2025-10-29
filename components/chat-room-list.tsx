@@ -52,7 +52,7 @@ export default function ChatRoomList({ chatRooms }: ChatRoomListProps) {
           >
             <div className="flex items-center space-x-3">
               <div className="flex -space-x-2">
-                {chatRoom.users.slice(0, 3).map((user, index) => (
+                {chatRoom.users.slice(0, 3).map((user) => (
                   <div
                     key={user.id}
                     className="w-10 h-10 rounded-full bg-orange-600 flex items-center justify-center text-white text-sm font-medium border-2 border-orange-400"

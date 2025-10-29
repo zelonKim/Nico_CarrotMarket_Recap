@@ -1,9 +1,9 @@
 "use server";
 
 import db from "@/lib/db";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
-export async function getMoreProducts(page: number) {
+export async function getMoreProducts() {
   revalidatePath("/home");
   console.log("Get more product from DB");
 

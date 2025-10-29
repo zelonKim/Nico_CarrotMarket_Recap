@@ -13,9 +13,6 @@ import {
 import getSession from "@/lib/session";
 import DeleteProductButton from "@/components/delete-product-button";
 
-const defaultUserImg =
-  "https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3408.jpg";
-
 async function getIsOwner(userId: number) {
   const session = await getSession();
   if (session.id) {
@@ -93,10 +90,10 @@ export default async function ProductDetail({
 
   const isOwner = await getIsOwner(product.userId);
 
-  const revalidate = async () => {
-    "use server";
-    revalidateTag("product-title"); // 해당 태그를 가진 캐시 함수를 다시 실행함.
-  };
+  // const revalidate = async () => {
+  //   "use server";
+  //   revalidateTag("product-title"); // 해당 태그를 가진 캐시 함수를 다시 실행함.
+  // };
 
   const deleteProduct = async () => {
     "use server";

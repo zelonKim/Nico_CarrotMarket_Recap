@@ -6,20 +6,12 @@ import {
   ArrowLeftIcon,
   ArrowRightEndOnRectangleIcon,
   ArrowUpCircleIcon,
-  UserCircleIcon,
 } from "@heroicons/react/24/solid";
 import Image from "next/image";
-import {
-  ForwardRefExoticComponent,
-  SVGProps,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useRef, useState } from "react";
 import { createClient, RealtimeChannel } from "@supabase/supabase-js";
 import { saveMessage } from "@/app/(tabs)/chat/action";
 import { deleteChatRoom } from "@/app/chats/[id]/actions";
-import db from "@/lib/db";
 import Link from "next/link";
 
 const defaultUserImg =
@@ -29,10 +21,6 @@ const SUPABASE_URL = "https://nyzoagzdjkqolbtyuduc.supabase.co";
 
 const SUPABASE_PUBLIC_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im55em9hZ3pkamtxb2xidHl1ZHVjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyNzM2MTcsImV4cCI6MjA3Njg0OTYxN30.ZZpajHOnRH9wxkfQo-Ize7XFYEiW2PCwzsnzEI-6ggw";
-
-interface Param {
-  id: string;
-}
 
 interface ChatMessageListProps {
   initialMessages: InitialChatMessages;
