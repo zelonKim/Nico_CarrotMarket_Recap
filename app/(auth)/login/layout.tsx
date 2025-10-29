@@ -18,7 +18,7 @@ const playfair = Playfair({
 export const metadata: Metadata = {
   title: {
     template: "%s | 캐럿 마켓",
-    default: "캐럿 마켓",
+    default: "로그인",
   },
   description: "실시간 중고거래 플랫폼 캐럿마켓",
 };

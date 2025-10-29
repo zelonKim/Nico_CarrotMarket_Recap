@@ -5,7 +5,7 @@ import SocialLogin from "@/components/social-login";
 import { useFormState } from "react-dom";
 import { createAccount } from "./actions";
 import Button from "@/components/button";
-
+import Link from "next/link";
 
 export default function CreateAccount() {
   const [state, dispatch] = useFormState(createAccount, null);
@@ -52,6 +52,12 @@ export default function CreateAccount() {
         <Button text="가입하기" />
       </form>
       <SocialLogin />
+      <span className="text-center *:text-white -mt-2">
+        이미 캐럿마켓 회원이신가요?{" "}
+        <Link href="/login" className="hover:underline">
+          로그인
+        </Link>
+      </span>
     </div>
   );
 }

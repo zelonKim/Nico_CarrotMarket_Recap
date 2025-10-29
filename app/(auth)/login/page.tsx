@@ -7,6 +7,7 @@ import { useFormState } from "react-dom";
 import { login } from "./actions";
 
 import Button from "@/components/button";
+import Link from "next/link";
 
 export default function LogIn() {
   const [state, actionTrigger] = useFormState(login, {
@@ -65,10 +66,17 @@ export default function LogIn() {
         />
         <Button text="로그인" />
       </form>
+
       {/* <span onClick={onClick}>
         <FormButton loading={false} text="로그인" />
       </span> */}
       <SocialLogin />
+      <span className="text-center *:text-white -mt-2">
+        캐럿마켓에 처음이신가요?{" "}
+        <Link href="/create-account" className="hover:underline">
+          회원가입
+        </Link>
+      </span>
     </div>
   );
 }
