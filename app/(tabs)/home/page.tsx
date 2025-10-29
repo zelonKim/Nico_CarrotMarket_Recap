@@ -11,7 +11,7 @@ const getCachedProducts = nextCache(
   { revalidate: 30 } // 30초가 지난 후 새로운 요청이 있을 경우, 해당 함수를 다시 호출함.
 );
 
-export async function getInitialProducts() {
+async function getInitialProducts() {
   const products = await db.product.findMany({
     select: {
       title: true,
