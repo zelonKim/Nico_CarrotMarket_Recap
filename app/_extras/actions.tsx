@@ -1,7 +1,7 @@
-"use server";
+// "use server";
 
-import "server-only";
+// import "server-only";
 
-export function fetchFromAPI() {
-  fetch("...");
-}
+// export function fetchFromAPI() {
+//   fetch("...");
+// }

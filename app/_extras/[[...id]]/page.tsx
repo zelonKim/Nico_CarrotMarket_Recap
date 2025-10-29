@@ -1,3 +1,4 @@
+/*
 import HackedComponent from "@/components/hacked-component";
 import { revalidatePath } from "next/cache";
 import Image from "next/image";
@@ -47,3 +48,4 @@ export default async function Extras({ params }: { params: { id: string[] } }) {
     </div>
   );
 }
+*/
