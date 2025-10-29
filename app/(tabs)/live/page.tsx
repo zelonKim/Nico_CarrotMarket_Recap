@@ -38,18 +38,18 @@ export default async function Live() {
       <h1 className=" text-orange-500 text-2xl font-bold mt-2 ms-4  pt-5 ps-5">
         실시간 라이브 방송 🥕
       </h1>
-      <div className="grid lg:grid-cols-2 p-5 gap-5">
-        {streams.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20">
-            <div className="text-orange-600 text-lg mb-2">
-              현재 진행중인 라이브 방송이 없습니다
-            </div>
-            <div className="text-orange-600 text-sm">
-              한번 방송을 시작해보세요!
-            </div>
+      {streams.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-20">
+          <div className="text-orange-600 text-lg mb-2">
+            현재 진행중인 라이브 방송이 없습니다
           </div>
-        ) : (
-          streams.map((stream) => (
+          <div className="text-orange-600 text-sm">
+            한번 방송을 시작해보세요!
+          </div>
+        </div>
+      ) : (
+        streams.map((stream) => (
+          <div className="grid lg:grid-cols-2 p-5 gap-5">
             <Link
               key={stream.id}
               href={`/streams/${stream.id}`}
@@ -126,9 +126,10 @@ export default async function Live() {
                 </span>
               </div>
             </Link>
-          ))
-        )}
-      </div>
+          </div>
+        ))
+      )}
+
       <Link
         href="/streams/add"
         className="bg-orange-500 flex justify-center items-center rounded-full size-16 fixed bottom-24 right-8 text-white transition-colors hover:bg-orange-400"
