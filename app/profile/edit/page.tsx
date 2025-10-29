@@ -50,8 +50,6 @@ export default function EditProfile() {
   });
 
   const {
-    register,
-    handleSubmit,
     formState: { errors },
     setValue,
   } = useForm<EditFormData>({
@@ -88,17 +86,22 @@ export default function EditProfile() {
     fetchUser();
   }, [setValue]);
 
-  const onSubmit = handleSubmit(async (data: EditFormData) => {
-    const formData = new FormData();
-    formData.append("username", data.username);
-    if (data.password) {
-      formData.append("password", data.password);
-    }
-    if (data.phone) {
-      formData.append("phone", data.phone);
-    }
-    if (data.avatar) {
-      formData.append("avatar", data.avatar);
+  const onSubmit = async (formData: FormData) => {
+    // react-hook-form의 validation을 위해 먼저 폼 데이터를 검증
+    const data = {
+      username: formData.get("username") as string,
+      password: formData.get("password") as string,
+      password_confirm: formData.get("password_confirm") as string,
+      phone: formData.get("phone") as string,
+      avatar: formData.get("avatar") as string,
+    };
+
+    // zod 스키마로 검증
+    const validationResult = editSchema.safeParse(data);
+    if (!validationResult.success) {
+      // 에러 처리
+      console.error("Validation failed:", validationResult.error);
+      return;
     }
 
     const result = await updateProfile(formData);
@@ -106,7 +109,7 @@ export default function EditProfile() {
     if (result) {
       router.push("/profile");
     }
-  });
+  };
 
   if (isLoading) {
     return (
@@ -128,7 +131,7 @@ export default function EditProfile() {
         </label>
         <Input
           id="name"
-          {...register("username")}
+          name="username"
           type="text"
           placeholder="홍길동"
           defaultValue={defaultValues.username}
@@ -141,7 +144,7 @@ export default function EditProfile() {
         </label>
         <Input
           id="phone"
-          {...register("phone")}
+          name="phone"
           type="text"
           placeholder="(-하이픈 없이)"
           defaultValue={defaultValues.phone}
@@ -153,7 +156,7 @@ export default function EditProfile() {
           프로필 사진 URL
         </label>
         <Input
-          {...register("avatar")}
+          name="avatar"
           type="text"
           placeholder="https://"
           defaultValue={defaultValues.avatar}
@@ -166,14 +169,14 @@ export default function EditProfile() {
         </label>
         <Input
           id="pwd"
-          {...register("password")}
+          name="password"
           type="password"
           placeholder="새 비밀번호"
           errors={[errors.password?.message ?? ""]}
         />
 
         <Input
-          {...register("password_confirm")}
+          name="password_confirm"
           type="password"
           placeholder="새 비밀번호 확인"
           errors={[errors.password_confirm?.message ?? ""]}
