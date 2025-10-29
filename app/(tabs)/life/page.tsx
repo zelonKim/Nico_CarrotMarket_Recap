@@ -1,4 +1,5 @@
 import db from "@/lib/db";
+import { unstable_noStore as noStore } from "next/cache";
 import { formatToTimeAgo } from "@/lib/utils";
 import {
   ChatBubbleBottomCenterIcon,
@@ -8,6 +9,7 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
 async function getPosts() {
+  noStore();
   // await new Promise(r => setTimeout(r,100000))
   const posts = await db.post.findMany({
     orderBy: {
