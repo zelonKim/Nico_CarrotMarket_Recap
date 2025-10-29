@@ -72,10 +72,7 @@ export default function EditProfile() {
     avatar: "",
   });
 
-  const {
-    formState: { errors },
-    setValue,
-  } = useForm<EditFormData>({
+  const { setValue } = useForm<EditFormData>({
     resolver: zodResolver(editSchema),
     defaultValues: {
       username: "",

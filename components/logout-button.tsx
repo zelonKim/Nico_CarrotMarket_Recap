@@ -1,6 +1,5 @@
 "use client";
 
-import { ArrowPathIcon } from "@heroicons/react/24/solid";
 import { useFormStatus } from "react-dom";
 import type { MouseEvent } from "react";
 
