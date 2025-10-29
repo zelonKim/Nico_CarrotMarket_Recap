@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  // provider = "postgresql"
-  provider = "sqlite" // 사용할 DB의 종류
+  // provider = "sqlite" // 사용할 DB의 종류
+  provider = "postgresql"
   url  	    = env("DATABASE_URL")// 사용할 DB의 위치
 }
 
