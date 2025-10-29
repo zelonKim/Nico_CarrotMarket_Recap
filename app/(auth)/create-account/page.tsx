@@ -24,8 +24,8 @@ export default function CreateAccount() {
           placeholder="유저 이름"
           required={true}
           errors={state?.fieldErrors.username}
-          minLength={3}
-          maxLength={10}
+          minLength={2}
+          maxLength={20}
         />
         <Input
           name="email"
@@ -38,7 +38,6 @@ export default function CreateAccount() {
           name="password"
           type="password"
           placeholder="비밀번호"
-          minLength={PASSWORD_MIN_LENGTH}
           required={true}
           errors={state?.fieldErrors.password}
         />
@@ -47,7 +46,6 @@ export default function CreateAccount() {
           type="password"
           placeholder="비밀번호 확인"
           required={true}
-          minLength={PASSWORD_MIN_LENGTH}
           errors={state?.fieldErrors.confirm_password}
         />
 

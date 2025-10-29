@@ -92,7 +92,7 @@ export default function AddProduct() {
       <form action={onValid} className="  p-5 flex flex-col gap-4">
         <label
           htmlFor="photo"
-          className="hover:border-orange-500 bg-orange-200 hover:bg-orange-300 bg-center bg-cover border-2 aspect-square max-h-96 flex items-center justify-center flex-col text-neutral-300 border-neutral-300 rounded-md border-dashed cursor-pointer"
+          className="max-w-screen-md hover:border-orange-500  bg-orange-200 hover:bg-orange-300 bg-center bg-cover border-2 aspect-square  max-h-[650px] flex items-center justify-center flex-col text-neutral-300 border-neutral-300 rounded-md border-dashed cursor-pointer "
           style={{ backgroundImage: `url(${preview})` }}
         >
           {preview === "" ? (
@@ -112,7 +112,7 @@ export default function AddProduct() {
           id="photo"
           name="photo"
           accept="image/*"
-          className="hidden"
+          className="hidden bg-cover bg-center"
         />
 
         <Input
@@ -120,7 +120,7 @@ export default function AddProduct() {
           placeholder="물품 이름"
           type="text"
           {...register("title")}
-          errors={[errors.title?.message ?? ""]}
+          //errors={[errors.title?.message ?? ""]}
         />
 
         <Input
@@ -128,7 +128,7 @@ export default function AddProduct() {
           required
           placeholder="가격"
           {...register("price")}
-          errors={[errors.price?.message ?? ""]}
+          //errors={[errors.price?.message ?? ""]}
         />
 
         <Input
@@ -136,7 +136,7 @@ export default function AddProduct() {
           required
           placeholder="설명"
           {...register("description")}
-          errors={[errors.description?.message ?? ""]}
+          //errors={[errors.description?.message ?? ""]}
         />
 
         <Button text="등록하기" />

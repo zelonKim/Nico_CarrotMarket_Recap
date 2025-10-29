@@ -1,7 +1,7 @@
 "use client";
 
 import { InitialChatMessages } from "@/app/chats/[id]/page";
-import { formatToTimeAgo } from "@/lib/utils";
+import { formatToTimeAgo, isValidHttpUrl } from "@/lib/utils";
 import {
   ArrowLeftIcon,
   ArrowRightEndOnRectangleIcon,
@@ -133,7 +133,11 @@ export default function ChatMessagesList({
                 className="relative"
               >
                 <Image
-                  src={participant.avatar || defaultUserImg}
+                  src={
+                    isValidHttpUrl(participant.avatar)
+                      ? participant.avatar!
+                      : defaultUserImg
+                  }
                   alt={participant.username}
                   width={40}
                   height={40}
@@ -153,10 +157,11 @@ export default function ChatMessagesList({
           className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white transition-colors"
         >
           <ArrowRightEndOnRectangleIcon className="size-5" />
+          나가기
         </button>
       </div>
 
-      <div className="p-6 flex flex-col gap-5 min-h-screen justify-end  ">
+      <div className="p-6 flex flex-col gap-5 min-h-screen my-auto justify-end  ">
         {messages.map((message) => (
           <div
             key={message.id}
@@ -166,7 +171,12 @@ export default function ChatMessagesList({
           >
             {message.userId === userId ? null : (
               <Image
-                src={message.user.avatar || defaultUserImg}
+                src={
+                  typeof message.user.avatar === "string" &&
+                  isValidHttpUrl(message.user.avatar)
+                    ? message.user.avatar
+                    : defaultUserImg
+                }
                 alt={message.user.username}
                 width={50}
                 height={50}
@@ -196,7 +206,7 @@ export default function ChatMessagesList({
             required
             onChange={onChange}
             value={message}
-            className=" text-neutral-600 bg-transparent rounded-full w-full h-10 focus:outline-none px-5 ring-2 focus:ring-3 transition ring-neutral-400 focus:ring-orange-400 focus:bg-orange-200 border-none placeholder:text-neutral-400"
+            className="mb-16 text-neutral-600 bg-transparent rounded-full w-full h-10 focus:outline-none px-5 ring-2 focus:ring-3 transition ring-neutral-400 focus:ring-orange-400 focus:bg-orange-200 border-none placeholder:text-neutral-400"
             type="text"
             name="message"
             placeholder="메시지를 입력해주세요."

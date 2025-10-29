@@ -3,6 +3,7 @@ import getSession from "@/lib/session";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import ProfileStats from "@/components/profile-stats";
+import LogoutButton from "@/components/logout-button";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 
 async function getUser() {
@@ -74,6 +75,7 @@ export default async function Profile() {
 
   const logOut = async () => {
     "use server";
+
     const session = await getSession();
     await session.destroy(); // 세션을 제거함.
     redirect("/");
@@ -86,9 +88,7 @@ export default async function Profile() {
           {user?.username}님의 캐럿 🥕
         </h1>
         <form action={logOut}>
-          <button className=" bg-red-500 py-1 px-2 rounded-lg hover:bg-red-600 text-white">
-            로그아웃
-          </button>
+          <LogoutButton />
         </form>
       </div>
 

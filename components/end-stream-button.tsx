@@ -26,6 +26,7 @@ export default function EndStreamButton({ streamId }: EndStreamButtonProps) {
       className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
     >
       <VideoCameraSlashIcon className="size-5" />
+      종료하기
     </button>
   );
 }

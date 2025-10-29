@@ -160,13 +160,24 @@ export default async function PostDetail({
       <div className="shadow-sm flex flex-col  px-10 py-8 mt-10 text-neutral-800 -z-50 bg-orange-400 rounded-lg ">
         {isOwner && <DeletePostButton deletePost={deletePost} />}
         <div className="flex items-center gap-2 mb-2">
-          <Image
-            width={32}
-            height={32}
-            className="size-10 rounded-full"
-            src={post.user.avatar! || defaultUserImg}
-            alt={post.user.username || "익명"}
-          />
+          {post.user.avatar === "http://" ? (
+            <Image
+              width={32}
+              height={32}
+              className="size-10 rounded-full"
+              src={defaultUserImg}
+              alt={post.user.username || "익명"}
+            />
+          ) : (
+            <Image
+              width={32}
+              height={32}
+              className="size-10 rounded-full"
+              src={post.user.avatar!}
+              alt={post.user.username || "익명"}
+            />
+          )}
+
           <div className="flex flex-row gap-48 sm:gap-[320px]  md:gap-[450px]">
             <div className="flex flex-col items-start ms-2">
               <span className="text-lg font-normal">{post.user.username}</span>
@@ -192,6 +203,7 @@ export default async function PostDetail({
         <h3 className="text-lg font-semibold mb-4 text-neutral-800">
           댓글 {comments.length}
         </h3>
+
         {comments.length > 0 ? (
           <div className="space-y-4 mb-8 bg-orange-200  p-4 rounded-md shadow-sm">
             {comments.map((comment) => {
@@ -206,13 +218,23 @@ export default async function PostDetail({
                   key={comment.id}
                   className="flex items-start gap-4 border-b border-orange-400 pb-4 last:pb-0 last:border-b-0"
                 >
-                  <Image
-                    width={40}
-                    height={40}
-                    className="size-10 rounded-full"
-                    src={comment.user.avatar! || defaultUserImg}
-                    alt={comment.user.username || "익명"}
-                  />
+                  {comment.user.avatar === "http://" ? (
+                    <Image
+                      width={32}
+                      height={32}
+                      className="size-10 rounded-full"
+                      src={defaultUserImg}
+                      alt={comment.user.username || "익명"}
+                    />
+                  ) : (
+                    <Image
+                      width={32}
+                      height={32}
+                      className="size-10 rounded-full"
+                      src={comment.user.avatar!}
+                      alt={comment.user.username || "익명"}
+                    />
+                  )}
                   <div className="flex-1 ">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="font-medium text-neutral-800">

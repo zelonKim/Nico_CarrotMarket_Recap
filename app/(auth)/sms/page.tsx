@@ -17,7 +17,7 @@ export default function SMSLogin() {
     <div className="flex flex-col gap-10 py-8 px-6">
       <div className="flex flex-col gap-2 *:font-medium">
         <h1 className="text-2xl">SMS 로그인</h1>
-        <h2 className="text-xl">Verify your phone number</h2>
+        <h2 className="text-xl">핸드폰 번호로 간편하게 로그인 해보세요</h2>
       </div>
 
       <form action={dispatch} className="flex flex-col gap-3">

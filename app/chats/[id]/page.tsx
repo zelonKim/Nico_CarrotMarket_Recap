@@ -1,9 +1,7 @@
 import ChatMessagesList from "@/components/chat-messages-list";
 import db from "@/lib/db";
 import getSession from "@/lib/session";
-import {
-  ExclamationTriangleIcon,
-} from "@heroicons/react/24/outline";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { Prisma } from "@prisma/client";
 import { notFound } from "next/navigation";
 
@@ -92,6 +90,10 @@ export default async function ChatRoom({ params }: { params: { id: string } }) {
 
   if (!user) {
     return notFound();
+  }
+
+  if (user.avatar === "http://") {
+    user.avatar = defaultUserImg;
   }
 
   return (

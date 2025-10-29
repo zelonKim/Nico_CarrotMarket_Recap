@@ -5,6 +5,12 @@ import { z } from "zod";
 import bcrypt from "bcrypt";
 import getSession from "@/lib/session";
 import { redirect } from "next/navigation";
+import {
+  PASSWORD_MIN_LENGTH,
+  PASSWORD_MIN_LENGTH_ERROR,
+  PASSWORD_REGEX,
+  PASSWORD_REGEX_ERROR,
+} from "@/lib/constants";
 
 const checkEmailExists = async (email: string) => {
   const user = await db.user.findUnique({
@@ -24,9 +30,10 @@ const formSchema = z.object({
     .email()
     .toLowerCase()
     .refine(checkEmailExists, "존재하지 않는 이메일 입니다."),
-  password: z.string(),
-  //.min(PASSWORD_MIN_LENGTH, "비밀번호는 최소 4자리 이상이어야 합니다.")
-  //.regex(PASSWORD_REGEX, PASSWORD_REGEX_ERROR),
+  password: z
+    .string()
+    .min(PASSWORD_MIN_LENGTH, PASSWORD_MIN_LENGTH_ERROR)
+    .regex(PASSWORD_REGEX, PASSWORD_REGEX_ERROR),
 });
 
 /////////////////////
@@ -37,7 +44,6 @@ export const login = async (prevState: unknown, formData: FormData) => {
     email: formData.get("email"),
     password: formData.get("password"),
   };
-  // console.log(prevState);
   // await new Promise((resolve) => setTimeout(resolve, 5000)); // 5초동안 대기(pending)상태로 만듦.
   // console.log(formData.get("email"));
   // console.log(formData.get("password"));

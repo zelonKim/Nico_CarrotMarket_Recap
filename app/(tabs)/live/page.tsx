@@ -44,7 +44,9 @@ export default async function Live() {
             <div className="text-orange-600 text-lg mb-2">
               현재 진행중인 라이브 방송이 없습니다
             </div>
-            <div className="text-orange-600 text-sm">한번 방송을 시작해보세요!</div>
+            <div className="text-orange-600 text-sm">
+              한번 방송을 시작해보세요!
+            </div>
           </div>
         ) : (
           streams.map((stream) => (
@@ -107,7 +109,7 @@ export default async function Live() {
                         className="w-full h-full object-cover "
                       />
                     ) : (
-                      <UserIcon className="size-6 text-orange-500" />
+                      <UserIcon className="size-6 text-neutral-600" />
                     )}
                   </div>
                   <span className="text-sm text-neutral-800">

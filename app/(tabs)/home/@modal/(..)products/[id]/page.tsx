@@ -1,7 +1,7 @@
 import CloseBtn from "@/components/close-btn";
 import NextBtn from "@/components/next-btn";
 import db from "@/lib/db";
-import { formatToWon } from "@/lib/utils";
+import { formatToWon, isValidHttpUrl } from "@/lib/utils";
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
@@ -57,7 +57,7 @@ export default async function Modal({ params }: { params: { id: string } }) {
             </div>
 
             <div className="text-md flex flex-col  md:flex-row  gap-3 mt-14 ">
-              {product?.user.avatar ? (
+              {product?.user.avatar && isValidHttpUrl(product.user.avatar) ? (
                 <Image
                   src={`${product?.user.avatar}/avatar`}
                   alt={product?.user.username || "익명"}

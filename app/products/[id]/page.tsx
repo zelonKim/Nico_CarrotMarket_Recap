@@ -2,6 +2,7 @@ import db from "@/lib/db";
 // import getSession from "@/lib/session";
 import { formatToWon } from "@/lib/utils";
 import { ArrowLeftIcon, UserIcon } from "@heroicons/react/24/solid";
+import { isValidHttpUrl } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
@@ -147,7 +148,7 @@ export default async function ProductDetail({
       </div>
       <div className="text-neutral-800 p-5 mt-2 flex items-center gap-3 border-b border-orange-400">
         <div className="size-10 overflow-hidden rounded-full">
-          {product.user.avatar !== null ? (
+          {product.user.avatar && isValidHttpUrl(product.user.avatar) ? (
             <Image
               src={product.user.avatar}
               width={40}

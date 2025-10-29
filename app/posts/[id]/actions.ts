@@ -54,6 +54,7 @@ export async function addComment(payload: string, postId: number) {
         payload,
         postId,
         userId: session.id!,
+        
       },
     });
     revalidatePath(`/posts/${postId}`);

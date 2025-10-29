@@ -6,7 +6,7 @@ import { z } from "zod";
 import Input from "@/components/input";
 import Button from "@/components/button";
 import { useEffect, useState } from "react";
-import { updateProfile } from "./actions";
+import { checkPhoneNumber, updateProfile } from "./actions";
 import {
   ArrowPathIcon,
   DevicePhoneMobileIcon,
@@ -15,13 +15,36 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
+import { useFormState } from "react-dom";
+import {
+  PASSWORD_MIN_LENGTH,
+  PASSWORD_MIN_LENGTH_ERROR,
+  PASSWORD_REGEX,
+  PASSWORD_REGEX_ERROR,
+} from "@/lib/constants";
+import Link from "next/link";
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 
 const editSchema = z
   .object({
-    username: z.string().min(3, "사용자 이름은 최소 3자 이상이어야 합니다."),
-    password: z.string().optional(),
+    username: z.string().min(2, "사용자 이름은 최소 2자 이상이어야 합니다."),
+    password: z
+      .string()
+      .optional()
+      .refine(
+        (value) =>
+          !value || value.length === 0 || value.length >= PASSWORD_MIN_LENGTH,
+        PASSWORD_MIN_LENGTH_ERROR
+      )
+      .refine(
+        (value) => !value || value.length === 0 || PASSWORD_REGEX.test(value),
+        PASSWORD_REGEX_ERROR
+      ),
     password_confirm: z.string().optional(),
-    phone: z.string().optional(),
+    phone: z
+      .string()
+      .optional()
+      .refine(checkPhoneNumber, "이미 사용중인 핸드폰 번호입니다."),
     avatar: z.string().optional(),
   })
   .refine(
@@ -86,7 +109,7 @@ export default function EditProfile() {
     fetchUser();
   }, [setValue]);
 
-  const onSubmit = async (formData: FormData) => {
+  const onSubmit = async (prevState: unknown, formData: FormData) => {
     // react-hook-form의 validation을 위해 먼저 폼 데이터를 검증
     const data = {
       username: formData.get("username") as string,
@@ -97,19 +120,20 @@ export default function EditProfile() {
     };
 
     // zod 스키마로 검증
-    const validationResult = editSchema.safeParse(data);
-    if (!validationResult.success) {
-      // 에러 처리
-      console.error("Validation failed:", validationResult.error);
-      return;
+    const result = await editSchema.safeParseAsync(data);
+
+    if (!result.success) {
+      return result.error.flatten();
     }
 
-    const result = await updateProfile(formData);
+    const success = await updateProfile(formData);
 
-    if (result) {
+    if (success) {
       router.push("/profile");
     }
   };
+
+  const [state, action] = useFormState(onSubmit, null);
 
   if (isLoading) {
     return (
@@ -121,10 +145,14 @@ export default function EditProfile() {
 
   return (
     <div className="p-8 *:text-neutral-800 max-w-screen-md mx-auto">
-      <h1 className="text-2xl font-semibold mb-6 text-center mt-12  ">
-        나의 프로필
+      <Link href="/profile">
+        <ArrowLeftIcon className="size-8   text-neutral-600 hover:text-neutral-700  hover:scale-110 " />
+      </Link>
+
+      <h1 className="text-2xl font-semibold mb-6 text-center mt-8  ">
+        마이 프로필 🥕
       </h1>
-      <form action={onSubmit} className="flex flex-col gap-3">
+      <form action={action} className="flex flex-col gap-3">
         <label htmlFor="name" className="flex gap-2 ">
           <PencilSquareIcon className="size-6" />
           이름
@@ -135,7 +163,7 @@ export default function EditProfile() {
           type="text"
           placeholder="홍길동"
           defaultValue={defaultValues.username}
-          errors={[errors.username?.message ?? ""]}
+          errors={state?.fieldErrors.username}
         />
 
         <label htmlFor="phone" className="flex gap-2">
@@ -148,7 +176,7 @@ export default function EditProfile() {
           type="text"
           placeholder="(-하이픈 없이)"
           defaultValue={defaultValues.phone}
-          errors={[errors.phone?.message ?? ""]}
+          errors={state?.fieldErrors.phone}
         />
 
         <label htmlFor="phone" className="flex gap-2">
@@ -160,7 +188,7 @@ export default function EditProfile() {
           type="text"
           placeholder="https://"
           defaultValue={defaultValues.avatar}
-          errors={[errors.avatar?.message ?? ""]}
+          errors={state?.fieldErrors.avatar}
         />
 
         <label className="mt-8 flex gap-2" htmlFor="pwd">
@@ -172,14 +200,14 @@ export default function EditProfile() {
           name="password"
           type="password"
           placeholder="새 비밀번호"
-          errors={[errors.password?.message ?? ""]}
+          errors={state?.fieldErrors.password}
         />
 
         <Input
           name="password_confirm"
           type="password"
           placeholder="새 비밀번호 확인"
-          errors={[errors.password_confirm?.message ?? ""]}
+          errors={state?.fieldErrors.password_confirm}
         />
         <div className="mt-1"></div>
         <Button text="변경하기" />

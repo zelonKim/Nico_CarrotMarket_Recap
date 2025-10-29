@@ -51,7 +51,7 @@ export default async function StreamDetail({
         <Link href="/live">
           <ArrowLeftIcon className="size-8 hover:scale-110 hover:text-neutral-700 text-neutral-600 cursor-pointer" />
         </Link>
-        {isOwner && <EndStreamButton streamId={id} />}
+        {isOwner && <EndStreamButton streamId={id} /> }
       </div>
       <div className="relative aspect-video">
         <iframe
@@ -62,7 +62,7 @@ export default async function StreamDetail({
       </div>
       <div className="p-5 flex items-center gap-3 border-b border-orange-400">
         <div className="size-10 overflow-hidden rounded-full">
-          {stream.user.avatar !== null ? (
+          {stream.user.avatar && stream.user.avatar !== "http://" ? (
             <Image
               src={stream.user.avatar}
               width={40}

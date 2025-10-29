@@ -15,6 +15,16 @@ export default function LogIn() {
   // 첫번째 원소에는 해당 서버액션의 리턴값이 담김.
   // 두번째 원소에는 해당 서버액션을 호출하는 트리거가 담김.
 
+  // 타입 가드 함수
+  const getFieldErrors = (fieldName: string): string[] => {
+    if (state && typeof state === "object" && "fieldErrors" in state) {
+      const fieldErrors = (state as { fieldErrors?: Record<string, string[]> })
+        .fieldErrors;
+      return fieldErrors?.[fieldName] || [];
+    }
+    return [];
+  };
+
   /*
   // API 라우트 핸들러 
   const onClick = async () => {
@@ -44,15 +54,14 @@ export default function LogIn() {
           type="email"
           placeholder="이메일"
           required
-          //errors={state?.fieldErrors?.email}
+          errors={getFieldErrors("email")}
         />
         <FormInput
           name="password"
           type="password"
           placeholder="비밀번호"
           required
-          minLength={PASSWORD_MIN_LENGTH}
-          //errors={state?.fieldErrors?.password}
+          errors={getFieldErrors("password")}
         />
         <Button text="로그인" />
       </form>

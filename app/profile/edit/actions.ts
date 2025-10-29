@@ -5,6 +5,31 @@ import getSession from "@/lib/session";
 import bcrypt from "bcrypt";
 import { revalidatePath } from "next/cache";
 
+export async function checkPhoneNumber(phone?: string) {
+  if (!phone) {
+    return true;
+  }
+
+  const session = await getSession();
+
+  const existingUser = await db.user.findFirst({
+    where: {
+      phone,
+      NOT: session.id
+        ? {
+            id: session.id,
+          }
+        : undefined,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  // Return true if the phone is available (no other user has it)
+  return !Boolean(existingUser);
+}
+
 export async function updateProfile(formData: FormData) {
   const session = await getSession();
   if (!session.id) {

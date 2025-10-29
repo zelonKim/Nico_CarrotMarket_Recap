@@ -22,8 +22,11 @@ const _Input = (
         {...rest}
       />
       {errors.map((error, index) => (
-        <span key={index} className="text-red-500 font-medium">
-          {error}
+        <span
+          key={index}
+          className="text-red-500  font-semibold rounded-sm bg-orange-50 ring-2 ring-red-500 px-3 mr-auto "
+        >
+          ⚠ {error}
         </span>
       ))}
     </div>

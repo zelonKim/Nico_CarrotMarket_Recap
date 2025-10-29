@@ -1,12 +1,25 @@
 export function formatToTimeAgo(date: string): string {
-    const time = new Date(date).getTime()
-    const now = new Date().getTime()
-    const diff = Math.round((time - now) / (1000 * 60 * 60* 24))
+  const time = new Date(date).getTime();
+  const now = new Date().getTime();
+  const diff = Math.round((time - now) / (1000 * 60 * 60 * 24));
 
-    const formatter = new Intl.RelativeTimeFormat("ko")
-    return formatter.format(diff, "days") 
+  const formatter = new Intl.RelativeTimeFormat("ko");
+  return formatter.format(diff, "days");
 }
 
-export function formatToWon(price:number) {
-    return price.toLocaleString("ko-KR")
+export function formatToWon(price: number) {
+  return price.toLocaleString("ko-KR");
+}
+
+export function isValidHttpUrl(url: string | null | undefined): boolean {
+  if (!url) return false;
+  try {
+    const parsed = new URL(url);
+    return (
+      (parsed.protocol === "http:" || parsed.protocol === "https:") &&
+      Boolean(parsed.hostname)
+    );
+  } catch {
+    return false;
+  }
 }
