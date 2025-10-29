@@ -10,7 +10,7 @@ import Button from "@/components/button";
 
 export default function LogIn() {
   const [state, actionTrigger] = useFormState(login, {
-    errors: ["처음 호출된 서버액션 에러 입니다."],
+    errors: ["First Server Action Test"],
   } as unknown); // 인수로 원하는 서버액션과 초기 상태값을 전달함.
   // 첫번째 원소에는 해당 서버액션의 리턴값이 담김.
   // 두번째 원소에는 해당 서버액션을 호출하는 트리거가 담김.

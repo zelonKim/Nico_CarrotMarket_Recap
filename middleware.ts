@@ -36,5 +36,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   // 미들웨어가 실행될 경로를 설정함.
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.gif|.*\\.svg|.*\\.ico|.*\\.webp).*)",
+  ],
 };
