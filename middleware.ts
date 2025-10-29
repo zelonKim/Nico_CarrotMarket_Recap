@@ -15,24 +15,23 @@ const publicOnlyUrls: Routes = {
 };
 
 export async function middleware(request: NextRequest) {
-  /*
+  const session = await getSession();
 
-    const session = await getSession();
+  const exists = publicOnlyUrls[request.nextUrl.pathname];
 
-    const exists = publicOnlyUrls[request.nextUrl.pathname]
-
-    if(!session.id) { // 세션에 id가 없는 경우 -> 유저가 로그인 상태가 아닌 경우
-        if(!exists) { // publicOnlyUrls로 이동하지 않는 경우
-            return NextResponse.redirect(new URL("/", request.url))
-        }
+  if (!session.id) {
+    // 세션에 id가 없는 경우 -> 유저가 로그인 상태가 아닌 경우
+    if (!exists) {
+      // publicOnlyUrls로 이동하지 않는 경우
+      return NextResponse.redirect(new URL("/login", request.url));
     }
-    else { // 유저가 로그인 상태인 경우
-        if(exists){ // publicOnlyUrls로 이동하는 경우
-            return NextResponse.redirect(new URL("/home", request.url))
-        } 
+  } else {
+    // 유저가 로그인 상태인 경우
+    if (exists) {
+      // publicOnlyUrls로 이동하는 경우
+      return NextResponse.redirect(new URL("/home", request.url));
     }
-
-    */
+  }
 }
 
 export const config = {
